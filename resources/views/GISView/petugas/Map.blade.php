@@ -4,10 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {{-- Google icont --}}
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    
+
+
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.css">
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <link rel="stylesheet" href="http://unpkg.com/leaflet@1.4.0/dist/leaflet.css" />
     <script src="http://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
@@ -17,6 +21,61 @@
     <link rel="stylesheet" href="{{asset('build/assets/app-e9522f14.css')}}">
     @vite('resources/css/app.css')
     <title>GIS CISOKAN</title>
+
+    <style>
+        #EventSidebar.left-0 {
+            transform: translateX(0);
+        }
+
+        #EventSidebar.-left-96 {
+            transform: translateX(-100%);
+        }
+
+        #divForm {
+            margin-top: 50px;
+            
+        }
+
+        /* Untuk Transition Form */
+        .transitionsFrom {
+            margin-right: -435px;
+        }
+        #formContent {
+            margin-top: 85px;
+        }
+        #overflowForm {
+            scrollbar-width: thin;
+            scrollbar-color: #4a4a4a transparent; 
+        }
+        #overflowForm::-webkit-scrollbar-track {
+            background-color: transparent;
+        }
+        #overflowForm::-webkit-scrollbar-thumb {
+        background-color: transparent; 
+        border-radius: 6px; 
+        border: 2px solid #fff; 
+        }
+
+        /* Untuk Animasi Add */
+        @keyframes rotate {
+            0% {
+        transform: rotate(0deg);
+        }
+        50% {
+            transform: rotate(180deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
+        }
+
+        .clicked {
+            background-color: red;
+            animation-name: rotate;
+            animation-duration: 2s;
+            animation-timing-function: ease;
+        }
+    </style>
 </head>
 <body class="h-[200px]" x-data="{
     show: false,
@@ -24,12 +83,19 @@
     }">
     <div>
         @include('sweetalert::alert')
-        <div class="p-4 flex justify-between items-center text-center drop-shadow-lg bg-white border-b-2 border-slate-500">
+        
+        <div class="p-6 fixed z-50 w-full top-0 flex justify-between items-center text-center drop-shadow-lg bg-white border-b-2 border-slate-500">
+            <button id="toggleSidebar" class="flex flex-col gap-1 p-2 bg-white rounded-md">
+                <span id="bar1" class="h-[4px] w-6 bg-black transition-transform duration-300 transform origin-center"></span>
+                <span id="bar2" class="h-[4px] w-6 bg-black transition-transform duration-300 transform origin-center"></span>
+                <span id="bar3" class="h-[4px] w-6 bg-black transition-transform duration-300 transform origin-center"></span>
+              </button>
+              
             <h1 class="font-bold text-2xl text-slate-700">
-                <span class="text-blue-600">GRM PLT </span>PUMPED STORAGE
+                <span class="text-blue-600">GRM PLT </span><span id="pumped">PUMPED STORAGE</span>
             </h1>
             <div class="flex gap-4">
-                <p class="text-lg font-semibold text-slate-600">
+                <p id="haloUser" class="text-lg font-semibold text-slate-600">
                     Hi,<span class="text-blue-600">
                         @if(session()->has('logged','id_petugas'))
                         {{$user->username}}
@@ -59,121 +125,142 @@
                 </div>
             </div>
         </div>
-        <div class="p-2 flex">
-            <div class="w-8/12 p-2 drop-shadow-xl relative z-10">
-                <button class="absolute z-20 top-6 left-5 px-3 py-2 bg-white text-slate-900 rounded text-center drop-shadow-xl font-semibold focus:outline-none " onclick="getCurentPosition()">Get Postion</button>
-                <div id="map" class="rounded drop-shadow-lg h-[550px] w-[100%] z-10">
-                </div>
-                <div class="coordinate absolute z-20 bottom-6 left-5 px-3  py-2 rounded bg-white drop-shadow-lg text-slate-900 text-base font-medium"></div>
-            </div>
-            <div class="w-4/12 p-2 shadow-lg flex flex-col drop-shadow-lg rounded-md h-[550px]">
-                <div class="p-4 text-center border-b border-slate-600">
-                    <h1 class="font-bold text-lg text-slate-600">GRIEVANCE <span class="text-cyan-600">FORM</span> GRM</h1>
-                </div>
-                <form method="POST" action="{{route('add_grievance')}}" class="overflow-y-scroll" enctype="multipart/form-data">
-                    @csrf
-                    <div class="p-2 flex flex-col gap-2 drop-shadow-lg mt-4">
-                        <div class="flex gap-2">
-                            <div class="flex flex-col">
-                                <label class="font-semibold text-lg text-slate-600">Lattitude</label>
-                                <input type="text" name="lattitude" id="lat" class="px-2 py-1 border border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-400 rounded-md shadow-md w-full">
-                            </div>
-                            <div class="flex flex-col">
-                                <label class="font-semibold text-lg text-slate-600">Longitude</label>
-                                <input type="text" name="longitude" id="long" class="px-2 py-1 border border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-400 rounded-md shadow-md w-full">
-                            </div>
-                        </div>
-                        <div class="flex flex-col">
-                            <label class="font-semibold text-lg text-slate-600">Issue</label>
-                            <textarea name="issue" id="" class="px-2 py-1 border border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-400 rounded-md shadow-md w-full"></textarea>
-                        </div>
-                        <div class="flex flex-col">
-                            <label class="font-semibold text-lg text-slate-600">Category</label>
-                            <input name='category' type="text" class="px-2 py-1 border border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-400 rounded-md shadow-md w-full">
-                        </div>
-                        <div class="flex flex-col">
-                            <label class="font-semibold text-lg text-slate-600">Locations</label>
-                            <input name="locations" type="text" class="px-2 py-1 border border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-400 rounded-md shadow-md w-full">
-                        </div>
-                        <div class="flex flex-col">
-                            <label class="font-semibold text-lg text-slate-600">Complainants</label>
-                            <input name="complainants" type="text" class="px-2 py-1 border border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-400 rounded-md shadow-md w-full">
-                        </div>
-                        <div class="flex flex-col">
-                            <label for="" class="font-semibold text-lg text-slate-600">Input File Image</label>
-                            <div class="border border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-300 rounded-full shadow-md w-full">
-                                <label class="block">
-                                  <span class="sr-only">Choose File</span>
-                                  <input type="file" name="image_location"
-                                    class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
-                                </label>
-                            </div>
-                        </div>
-                        <div class="flex flex-col" id="signaturPad">
-                            <label for="signature_ttd">TTD</label>
-                            <canvas id="signature_ttd" class="px-2 py-1 border border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-400 rounded-md shadow-md w-full"></canvas>
-                            <div class="flex justify-between">
-                                <input type="hidden" name="image_ttd" id="image_ttd_canvas">
-                                <button type="button" class="px-2 py-1 text-white bg-red-800 rounded hover:cursor-pointer" data-action="clear_ttd">CLEAR TTD</button>
-                                {{-- <button type="button" class="px-2 py-1 text-white bg-cyan-800 rounded" data-action="save_image_ttd">SUBMIT</button> --}}
-                                <button type="submit" class="px-2 py-1 text-white bg-cyan-800 rounded" data-action="save_image_ttd">SUBMIT</button>
-                                <button type="button" class="px-2 py-1 text-white bg-yellow-800 rounded" x-on:click="showTable = !showTable">SHOW SUMMARY GRIEVANCE</button>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div  x-show="showTable"
-            x-transition:enter="transition ease-out duration-300"
-            x-transition:enter-start="opacity-0 scale-90"
-            x-transition:enter-end="opacity-100 scale-100"
-            x-transition:leave="transition ease-in duration-300"
-            x-transition:leave-start="opacity-100 scale-100"
-            x-transition:leave-end="opacity-0 scale-90" class="z-50">
-                <div class="relative w-full">
-                    <div class="z-50 absolute h-[500px] -translate-x-[1170px] bg-white px-4 py-2 rounded drop-shadow-lg text-center overflow-y-auto">
-                        <button type="button"  x-on:click="showTable = false">
-                            <i class="fa-solid fa-rectangle-xmark text-2xl absolute translate-x-[450px] text-red-600"></i>
+        
+        {{-- <button id="toggleSidebar" class="flex flex-col gap-1 p-2 bg-white rounded-md">
+            <span id="bar1" class="h-[4px] w-6 bg-black transition-all duration-500"></span>
+            <span id="bar2" class="h-[4px] w-6 bg-black transition-all duration-500"></span>
+            <span id="bar3" class="h-[4px] w-6 bg-black transition-all duration-500"></span>
+        </button> --}}
+        
+        <aside id="EventSidebar" class="fixed inset-y-0 h-screen bg-white shadow-lg z-20 flex flex-col items-center px-4 -left-96 transition-transform duration-300">
+            <div class="w-full mt-24">
+                <ul class="mb-14 flex flex-col  gap-2">
+                    <li class="md:text-base lg:px-4">
+                        <a href="/petugasmap" class="flex items-center w-full gap-4 px-2 py-2 active:bg-slate-600 hover:bg-slate-500 rounded-lg transition-all duration-200 ease-in-out text-slate-800 hover:text-white" x-on:click="isLoading = true">
+                            <i class="fa-solid fa-house text-[20px] w-6 text-center"></i><span class="text-lg font-semibold ">Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="md:text-base lg:px-4">
+                        <button type="button" x-on:click="showTable = !showTable" class="flex items-center w-full gap-4 px-2 py-2 hover:bg-slate-500 rounded-lg transition-all duration-200 ease-in-out text-slate-800 hover:text-white" x-on:click="isLoading = true">
+                            <i class="fa-solid fa-file text-[20px] w-6 text-center"></i><span class="text-lg font-semibold">Grievance</span>
                         </button>
-                        <p class="text-lg font-bold text-center py-4 text-blue-600">SUMMMARY <span class="text-neutral-600">GRIVANCE</span></p>
-                        <div>
-                            <table>
-                                <thead>
-                                    <tr class=" border-b border-neutral-500">
-                                        <th class="px-6 py-1">Grievance Num</th>
-                                        <th class="px-6 py-1">Date Of Submission</th>
-                                        <th class="px-6 py-1">Issue</th>
-                                        <th class="px-6 py-1">Category</th>
-                                        <th class="px-6 py-1">Location</th>
-                                        <th class="px-6 py-1">Complaiments</th>
-                                        <th class="px-6 py-1">Status</th>
-                                        <th class="px-6 py-1">Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                @foreach ($data_grievance as $value)
-                                    <tr class="border-b border-neutral-500 m-6">
-                                        <td class=" text-neutral-600 font-semibold">{{$value->grievance_num}}</td>
-                                        <td class=" text-neutral-600 font-semibold">{{$value->created_at}}</td>
-                                        <td class=" text-neutral-600 font-semibold">{{$value->issue}}</td>
-                                        <td class=" text-neutral-600 font-semibold">{{$value->category}}</td>
-                                        <td class=" text-neutral-600 font-semibold">{{$value->locations}}</td>
-                                        <td class=" text-neutral-600 font-semibold">{{$value->complainants}}</td>
-                                        <td class="">
-                                            <a href="" class="bg-yellow-600 text-white rounded px-3 py-2">{{$value->status}}</a>
-                                        </td>
-                                        <td class="px-6 py-1">
-                                            <a href="" class="bg-green-800 text-white rounded px-4 py-2"><i class="fa-solid fa-download"></i></a>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                                </tbody>
-                            </table>
+                    </li>
+                </ul>
+            </div>
+        </aside>
+        
+        <div id="formContent" class=" right-0  inset-y-0 shadow-2xl drop-shadow-lg h-screen bg-white z-30 sm:absolute lg:w-1/3 animate-slideIn hidden overflow-y-scroll">
+            <div class="fixed w-full z-50 bg-white p-4 text-center border-b border-slate-600 shadow-sm">
+                <h1 class="font-bold text-lg text-slate-600">GRIEVANCE <span class="text-cyan-600">FORM</span> GRM</h1>
+            </div><br><br><br>
+            <form id="overflowForm" method="POST" action="{{route('add_grievance')}}" class="" enctype="multipart/form-data">
+                @csrf
+                
+                <div class="px-4 flex flex-col gap-2">
+                    <div class="flex gap-2 flex-col sm:flex-row w-full">
+
+                        <div class="flex flex-col w-full">
+                            <label for="dateInput" class="block text-sm font-medium text-slate-600">Hari/Tanggal</label>
+                            <div class="mt-1 relative">
+                                <input type="date" id="dateInput" name="dateInput" class="form-input px-2 py-1 block w-full leading-5 rounded-md border  focus:outline-none focus:ring-1 focus:ring-blue-400">
+                            </div>
+                        </div>
+                        <div class="flex flex-col w-full">
+                            <label for="nomorAduan" class="font-semibold text-slate-600 text-base">Nomor Kode Aduan</label>
+                            <input type="number" name="nomorAduan" id="nomorAduan" class="px-2 py-1 border  focus:outline-none focus:ring-1 focus:ring-blue-400 rounded-md w-full uppercase">
                         </div>
                     </div>
+                    <div class="flex gap-2">
+                        <div class="flex flex-col w-full">
+                            <label for="namaPelapor" class="font-semibold text-slate-600 text-base">Nama Pelapor</label>
+                            <input type="text" name="namaPelapor" id="namaPelapor" class="px-2 py-1 border  focus:outline-none focus:ring-1 focus:ring-blue-400 rounded-md w-full uppercase">
+                        </div>
+                        <div class="flex flex-col w-full">
+                            <label for="inputRt" class="font-semibold text-slate-600 text-base">RT/RW</label>
+                            <input type="number" name="inputRt" id="inputRt" class="px-2 py-1 border  focus:outline-none focus:ring-1 focus:ring-blue-400 rounded-md w-full uppercase">
+                        </div>
+                    </div>
+                    <div class="flex gap-2">
+                        <div class="flex flex-col w-full">
+                            <label for="inputDusun" class="font-semibold text-slate-600 text-base">Dusun/Kampung</label>
+                            <input type="text" name="inputDusun" id="inputDusun" class="px-2 py-1 border focus:outline-none focus:ring-1 focus:ring-blue-400 rounded-md w-full uppercase">
+                        </div>
+                        <div class="flex flex-col w-full">
+                            <label for="desa" class="font-semibold text-slate-600 text-base">Desa</label>
+                            <input type="text" name="desa" id="desa" class="px-2 py-1 border  focus:outline-none focus:ring-1 focus:ring-blue-400 rounded-md w-full uppercase">
+                        </div>
+                    </div>
+                    <div class="flex flex-col">
+                        <label for="noKTP" class="font-semibold text-slate-600 text-base">No. KTP</label>
+                        <input type="number" name="noKTP" id="noKTP" class="px-2 py-1 border  focus:outline-none focus:ring-1 focus:ring-blue-400 rounded-md w-full uppercase">
+                    </div>
+                    <div class="flex flex-col">
+                        <label for="noKontak" class="font-semibold text-slate-600 text-base">No. Kontak Pelapor</label>
+                        <input type="number" name="noKontak" id="noKontak" class="px-2 py-1 border  focus:outline-none focus:ring-1 focus:ring-blue-400 rounded-md w-full uppercase">
+                    </div>
+                    <div class="flex flex-col">
+                        <label for="kategori" class="font-semibold text-slate-600 text-base">Kategori</label>
+                        <input type="text" name="kategori" id="kategori" class="px-2 py-1 border  focus:outline-none focus:ring-1 focus:ring-blue-400 rounded-md w-full uppercase">
+                    </div>
+                    <div class="flex flex-col">
+                        <label class="font-semibold text-slate-600 text-base">Uraian aduan</label>
+                        <textarea name="uraianAduan" id="" class="px-2 py-1 border  focus:outline-none focus:ring-1 focus:ring-blue-400 rounded-md w-full"></textarea>
+                    </div>
+                    <div class="flex flex-col">
+                        <label class="font-semibold text-slate-600 text-base">Jalur aduan </label>
+                        <input name="jalurAduan" type="text" class="px-2 py-1 border  focus:outline-none focus:ring-1 focus:ring-blue-400 rounded-md w-full">
+                    </div>
+                    <div class="flex flex-col">
+                        <label class="font-semibold text-slate-600 text-base">Uraian rencana tindak lanjut</label>
+                        <textarea name="uraianAduan" id="" class="px-2 py-1 border  focus:outline-none focus:ring-1 focus:ring-blue-400 rounded-md w-full"></textarea>
+                    </div>
+                    <div class="flex gap-2">
+                        <div class="flex flex-col w-full">
+                            <label class="font-semibold text-slate-600 text-base">Lattitude</label>
+                            <input type="text" name="lattitude" id="lat" class="px-2 py-1 border  focus:outline-none focus:ring-1 focus:ring-blue-400 rounded-md w-full uppercase">
+                        </div>
+                        <div class="flex flex-col w-full">
+                            <label class="font-semibold text-slate-600 text-base">Longitude</label>
+                            <input type="text" name="longitude" id="long" class="px-2 py-1 border  focus:outline-none focus:ring-1 focus:ring-blue-400 rounded-md w-full">
+                        </div>
+                    </div>
+                    <div class="flex flex-col">
+                        <label for="" class="font-semibold text-slate-600 text-base">Input File Image</label>
+                        <label class="flex border rounded-full">
+                            <span class="sr-only">Choose File</span>
+                            <input type="file" name="image_location"
+                                  class="block w-full text-[12px] text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
+                        </label>
+                    </div>
+                    <div class="block overflow-hidden">   
+                        <div class="flex justify-between h-8">
+                            <input type="hidden" name="image_ttd" id="image_ttd_canvas" class="rounded-tl-none">
+                            <label for="signature_ttd">TTD</label>
+                            <button type="button" class="px-2 py-1 text-white bg-red-800 rounded hover:cursor-pointer text-base rounded-bl-none focus:outline-none" data-action="clear_ttd">CLEAR TTD</button>
+                        </div>
+                        <canvas id="signature_ttd" class="px-2 py-1 border  focus:outline-none focus:ring-1 focus:ring-blue-400 rounded-md shadow-md w-full"></canvas>  
+                    </div>
+                    <div class="pb-2">
+                        <button type="submit" class="px-2 py-2 text-white bg-cyan-800 rounded w-full" data-action="save_image_ttd">SUBMIT</button>
+                    </div>
                 </div>
-                <div class="fixed inset-0 z-10 bg-neutral-500/10 backdrop-blur-sm" x-on:click="showTable = false"></div>
-            </div>
+            
+            </form>
+        </div>
+
+        <div id="btnAddEvent" class="fixed bottom-0 flex z-20 px-3 py-2 w-full justify-start items-center">
+            <button id="myButton" class="px-3 py-3 rounded-full flex items-center justify-center bg-blue-600 text-slate-900 text-center drop-shadow-xl font-semibold focus:outline-none transition ease-out duration-300">
+                <span id="buttonAdd" class="material-symbols-outlined text-white">add</span>
+            </button>
+        </div>
+    
+        <div id="divForm" class="flex justify-center relative">   
+            <div class="flex relative drop-shadow-xl z-10 w-full justify-center">
+                <button class="absolute z-20 left-5 -mt-10 py-1 px-3  sm:mt-12 bg-white text-slate-900 rounded text-center drop-shadow-xl font-semibold focus:outline-none " onclick="getCurentPosition()">Get Postion</button>
+                <div id="map" class="rounded drop-shadow-lg h-screen w-full z-10 -mt-12 sm:mt-9">
+                </div>
+                <div class="coordinate absolute z-20 bottom-6 left-5 px-3  py-2 rounded bg-white drop-shadow-lg text-slate-900 text-base font-medium"></div>     
+            </div>  
         </div>
     </div>
     <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
@@ -333,6 +420,95 @@
             $('.coordinate').html(`Lat : ${e.latlng.lat}, Long : ${e.latlng.lng}`);
         }
         map.on('mousemove', MoveLatLng)
+
+
+        // For Tmmbol add
+        const icon = document.getElementById('buttonAdd');
+        const button = document.getElementById('myButton');
+        const content = document.getElementById('formContent');
+
+        button.addEventListener('click', () => {
+        content.classList.toggle('hidden');
+        if (icon.innerText === 'add') {
+                icon.innerText = 'close';
+                button.classList.add('bg-red-500')
+            } else {
+                icon.innerText = 'add';
+                button.classList.remove('bg-red-500')
+            }
+
+            // Berikan animasi putar pada ikon
+            icon.style.animation = 'rotatePlusToX 0.5s ease-in-out';
+
+                // Setel timeout untuk menghapus animasi setelah selesai
+                setTimeout(() => {
+                    icon.style.animation = '';
+                }, 1000);
+            });
+
+        // Untuk Sidebar
+        const toggleSidebar = document.getElementById('toggleSidebar');
+        const eventSidebar = document.getElementById('EventSidebar');
+        
+
+        toggleSidebar.addEventListener('click', () => {
+            eventSidebar.classList.toggle('-left-96');
+           
+            document.getElementById('bar1').classList.toggle('-rotate-45');
+            document.getElementById('bar1').classList.toggle('translate-y-2');
+            document.getElementById('bar2').classList.toggle('opacity-0');
+            document.getElementById('bar3').classList.toggle('rotate-45');
+            document.getElementById('bar3').classList.toggle('-translate-y-2');
+        });
+
+    
+            
+
+        // Untuk Responsive navbar
+        function removeHiddenClass() {
+        const element = document.getElementById('pumped');
+        const haloUser = document.getElementById('haloUser');
+        const formContent = document.getElementById('formContent');
+        const btnAddEvent = document.getElementById('btnAddEvent');
+        
+
+        // responsive 
+        if (window.innerWidth <= 640) {
+            element.classList.add('hidden');
+            haloUser.classList.add('hidden');
+            
+            btnAddEvent.classList.add('justify-center')
+        } else {
+           
+            element.classList.remove('hidden');
+            haloUser.classList.remove('hidden');
+            
+            btnAddEvent.classList.remove('justify-center')
+        }
+        }
+
+        window.addEventListener('load', removeHiddenClass);
+        window.addEventListener('resize', removeHiddenClass);
+
+
+
+        document.getElementById('dateInput').addEventListener('change', function () {
+        // Get the selected date value
+        const selectedDate = this.value;
+
+        // Convert the selected date to the desired format (MM/DD/YY)
+        const formattedDate = new Date(selectedDate).toLocaleDateString('en-US', {
+            year: '2-digit',
+            month: '2-digit',
+            day: '2-digit'
+        });
+
+        // Set the formatted date back to the input
+        this.value = formattedDate;
+        });
+
     </script>
+
+    
 </body>
 </html>
