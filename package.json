@@ -13,9 +13,6 @@
         "vite": "^4.0.0"
     },
     "dependencies": {
-        "leaflet": "^1.9.4",
-        "leaflet-kmz": "^1.0.9",
-        "leaflet-omnivore": "^0.3.4",
-        "omnivore": "^0.0.2"
+        "leaflet": "^1.9.4"
     }
 }

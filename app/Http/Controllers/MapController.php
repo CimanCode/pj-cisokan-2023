@@ -14,7 +14,7 @@ class MapController extends Controller
     }
 
     public function getMap(){
-        $kml = file_get_contents('layers.kml');
+        $kml = file_get_contents('doc.kml');
         if(!$kml){
             return response()->json([
                 'status' => false,
