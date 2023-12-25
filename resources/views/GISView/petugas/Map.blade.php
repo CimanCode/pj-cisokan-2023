@@ -15,9 +15,8 @@
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <link rel="stylesheet" href="http://unpkg.com/leaflet@1.4.0/dist/leaflet.css" />
     <script src="http://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
-    {{-- <script src="https://unpkg.com/leaflet-omnivore@0.10.2/leaflet-omnivore.min.js"></script> --}}
-    {{-- <script src="https://unpkg.com/leaflet-kmz@latest/dist/leaflet-kmz.js"></script> --}}
-    <script src="{{asset('kml.js')}}"></script>
+    <script src="https://ihcantabria.github.io/Leaflet.CanvasLayer.Field/dist/leaflet.canvaslayer.field.js"></script>
+    <script src="{{asset('L.KML.js')}}"></script>
     <link rel="stylesheet" href="{{asset('build/assets/app-e9522f14.css')}}">
     @vite('resources/css/app.css')
     <title>GIS CISOKAN</title>
@@ -264,12 +263,11 @@
         </div>
     </div>
     <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
-    {{-- <script src="https://unpkg.com/leaflet-kmz@latest/dist/leaflet-kmz.js"></script> --}}
-    {{-- <script src="https://unpkg.com/leaflet-omnivore@0.10.2/leaflet-omnivore.min.js"></script> --}}
     <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-omnivore/0.3.4/leaflet-omnivore.min.js" integrity="sha512-55AYz+N6WyuiC8bRpQftNyCcSBCl3AEutoTsb4EeZuFVFP1+G4gll30iczAvvTpdL9nz48F7ZFEUavRUXp3FNA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
-    <script src="{{asset('kml.js')}}"></script>
-    <script>
+    <script src="{{asset('L.KML.js')}}"></script>
+    <script type="text/javascript">
         // signature_pad
         const signaturePad = document.getElementById("signaturePad");
         const clearButton = document.querySelector("[data-action=clear_ttd]");
@@ -343,21 +341,6 @@
             "satelite": googleSat
         };
 
-        fetch("/getKmlFile")
-                .then(res => res.text())
-                .then(kmltext => {
-                    // Create new kml overlay
-                    const parser = new DOMParser();
-                    const kml = parser.parseFromString(kmltext, 'text/xml');
-                    console.log(kml);
-                    var track = new L.KML(kml);
-                    const bounds = track.addTo(map);
-
-                    // Adjust map to show the kml
-                    map.fitBounds(bounds.getBounds());
-                    // const bounds = track.getBounds();
-                    // map.fitBounds(track.getBounds());
-                });
 
         // var overlayMaps = {
         //     "Cities": cities
@@ -382,6 +365,23 @@
                 });
             }, 500);
         }
+
+
+            fetch('/getKmlFile')
+                .then(res => res.text())
+                .then(kmltext => {
+                    // Create new kml overlay
+                    const parser = new DOMParser();
+                    const kml = parser.parseFromString(kmltext, 'text/xml');
+                    const track = new L.KML(kmltext, 'text/xml');
+                    map.addLayer(track);
+
+                    // Adjust map to show the kml
+                    const bounds = track.getBounds();
+                    map.fitBounds(bounds);
+                });
+
+
 
         function getPosition(position) {
             var lat = position.coords.latitude
