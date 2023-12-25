@@ -177,7 +177,7 @@
                 </tbody>
             </table>
             <!-- Main modal -->
-            <div id="crud-modal" tabindex="-1" aria-hidden="true" class="hidden z-50 fixed top-48 left-1/2 transform -translate-x-1/2 w-full sm:w-[70%] lg:w-1/2 transition-all duration-1000">
+            <div id="crud-modal" tabindex="-1" aria-hidden="true" class="-mt-[500px] z-50 fixed top-48 left-1/2 transform -translate-x-1/2 w-full sm:w-[70%] lg:w-1/2 transition-all duration-500">
                 <div class="relative px-4 w-full max-h-full">
                     <!-- Modal content -->
                     <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
@@ -258,12 +258,12 @@
         const crudModal = document.getElementById('crud-modal');
         const blockLayar = document.getElementById('blockLayar');
         btnModalClose.addEventListener('click', () => {
-            crudModal.classList.add('hidden'); 
+            crudModal.classList.toggle('-mt-[500px]');
             blockLayar.classList.add('hidden')
             
         })
         editModal.addEventListener('click', () => {
-            crudModal.classList.remove('hidden');
+            crudModal.classList.toggle('-mt-[500px]');
             crudModal.classList.add('opacity-100');
             blockLayar.classList.remove('hidden')
         })

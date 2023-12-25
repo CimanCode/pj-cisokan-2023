@@ -149,7 +149,7 @@
             </div>
         </aside>
         
-        <div id="formContent" class=" right-0  inset-y-0 shadow-2xl drop-shadow-lg h-screen bg-white z-30 sm:absolute lg:w-1/3 animate-slideIn hidden overflow-y-scroll">
+        <div id="formContent" class="w-full right-0 inset-y-0 shadow-2xl drop-shadow-lg h-screen bg-white z-30 absolute sm:w-1/2 lg:w-1/3 -top-[700px] overflow-y-scroll transition-all duration-500">
             <div class="fixed w-full z-50 bg-white p-4 text-center border-b border-slate-600 shadow-sm">
                 <h1 class="font-bold text-lg text-slate-600">GRIEVANCE <span class="text-cyan-600">FORM</span> GRM</h1>
             </div><br><br><br>
@@ -248,9 +248,9 @@
             </form>
         </div>
 
-        <div id="btnAddEvent" class="fixed bottom-0 flex z-20 px-3 py-2 w-full justify-start items-center">
-            <button id="myButton" class="px-3 py-3 rounded-full flex items-center justify-center bg-blue-600 text-slate-900 text-center drop-shadow-xl font-semibold focus:outline-none transition ease-out duration-300">
-                <span id="buttonAdd" class="material-symbols-outlined text-white">add</span>
+        <div id="btnAddEvent" class="absolute sm:fixed sm:bottom-0 flex z-40  px-3 py-2 w-full justify-start items-center">
+            <button id="myButton" class="px-6 sm:px-3 py-3 rounded-full flex items-center justify-center bg-blue-600 text-slate-900 text-center drop-shadow-xl font-semibold focus:outline-none transition ease-out duration-300">
+                <span id="buttonAdd" class="material-symbols-outlined text-transparent sm:text-white">add</span>
             </button>
         </div>
     
@@ -428,7 +428,7 @@
         const content = document.getElementById('formContent');
 
         button.addEventListener('click', () => {
-        content.classList.toggle('hidden');
+        content.classList.toggle('-top-[700px]');
         if (icon.innerText === 'add') {
                 icon.innerText = 'close';
                 button.classList.add('bg-red-500')
@@ -442,7 +442,6 @@
 
                 // Setel timeout untuk menghapus animasi setelah selesai
                 setTimeout(() => {
-                    icon.style.animation = '';
                 }, 1000);
             });
 
@@ -479,7 +478,7 @@
             
             btnAddEvent.classList.add('justify-center')
         } else {
-           
+            icon.classList.remove('hidden')
             element.classList.remove('hidden');
             haloUser.classList.remove('hidden');
             
