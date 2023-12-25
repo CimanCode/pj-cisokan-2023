@@ -30,8 +30,13 @@ use App\Http\Controllers\GrievanceController;
 Route::any('/logout',[AuthController::class, 'logout'])->name('logout');
 Route::post('/login',[AuthController::class, 'login'])->name('login');
 
-Route::get('/petugasmap', [PetugasController::class, 'index'])->name('petugasmap')->middleware('isPetugas');
+Route::get('/petugasmap', [PetugasController::class, 'mappetugas'])->name('petugasmap')->middleware('isPetugas');
+Route::get('/riwayat', [PetugasController::class, 'index'])->name('riwayat')->middleware('isPetugas');
+
 Route::post('/addGrievance',[GrievanceController::class, 'create_grievance'])->name('add_grievance')->middleware('isPetugas');
+Route::any('/edit',[GrievanceController::class, 'edit'])->name('edit_grievance')->middleware('isPetugas');
+Route::get('/detail_grievance',[GrievanceController::class, 'detail'])->name('detail')->middleware('isPetugas');
+Route::get('/delete',[GrievanceController::class, 'delete'])->name('delete')->middleware('isPetugas');
 Route::get('/',[GrievanceController::class, 'index'])->name('home');
 
 Route::get('/admin', [AdminController::class, 'index'])->name('adminMap')->middleware('isAdmin');

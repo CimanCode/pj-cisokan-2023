@@ -9,15 +9,25 @@ use Illuminate\Support\Facades\Session;
 
 class PetugasController extends Controller
 {
+
+    public function mappetugas(){
+        $users = Users::query()->where('user_id',session()->get('id_petugas'))->first();
+        $data_grievance = Grievance::query()->where('user_id',$users->user_id)->get();
+        $data = [
+            'user' => $users,
+            'grievance' => $data_grievance,
+        ];
+        return view('GISView.petugas.Map', $data);
+    }
+
     public function index(){
         $users = Users::query()->where('user_id',session()->get('id_petugas'))->first();
         $data_grievance = Grievance::query()->where('user_id',$users->user_id)->get();
-        // dd($data_grievance);
         $data = [
             'user' => $users,
             'data_grievance' => $data_grievance,
         ];
-        return view('GISView.petugas.Map', $data);
+        return view('GISView.petugas.riwayat', $data);
     }
 
     public function getFileKmz(){

@@ -20,6 +20,17 @@ class GrievanceController extends Controller
         return view('GISView.Map',$data);
     }
 
+    public function edit(Request $request){
+        $user = Users::where('user_id', Session::get('id_petugas'))->first();
+        $id = $request->id;
+        $grievance = Grievance::query()->where('grievance_id',$id)->first();
+        $data = [
+            'user' => $user,
+            'grievance' => $grievance
+        ];
+        return view('GISView.petugas.edit_grievance',$data);
+    }
+
     public function create_grievance(Request $request){
         $user = Users::where('user_id', Session::get('id_petugas'))->first();
         $rules = [
@@ -30,6 +41,13 @@ class GrievanceController extends Controller
             'locations' => 'required',
             'complainants' => 'required',
             'image_location' => 'required|max:2048',
+            'kampung' => 'sometimes|nullable',
+            'desa' => 'sometimes|nullable',
+            'rt_rw' => 'sometimes|nullable',
+            'no_ktp' => 'sometimes|nullable',
+            'no_telp' => 'sometimes|nullable',
+            'jalur_aduan' => 'sometimes|nullable',
+            'tanggal' => 'sometimes|nullable'
         ];
 
         $message = [
@@ -45,7 +63,8 @@ class GrievanceController extends Controller
 
         $validated = Validator::make($request->all(),$rules,$message);
         if($validated->fails()){
-            Alert::error('Oops!','An error occurred');
+            $error = implode(", ", array_map('implode', array_values($validated->errors()->messages())));
+            Alert::error('Oops!', $error);
             return redirect()->back();
         }
 
@@ -65,10 +84,43 @@ class GrievanceController extends Controller
             $request->getSchemeAndHttpHost() . Storage::put('public/image/' . $imageName, $signatureImage);
             $data['image_ttd'] = $imageName;
         }
+
+        if($request->id){
+            $is_updated = Grievance::query()->where('grievance_id', $request->id)->update($data);
+            dd($is_updated);
+            if(!$is_updated){
+                Alert::error('Oops!, Data Gagal Diupdate');
+                return redirect()->back();
+            }
+            Alert::success('Data Berhasil Diupdate');
+            return redirect()->back();
+        }
         $data['user_id'] = $user->user_id;
         $data['status'] = "Reported";
         Grievance::create($data);
         Alert::success('Data Successfully Created');
+        return redirect()->back();
+    }
+
+    public function detail(Request $request){
+        $id = $request->id;
+        $users = Users::query()->where('user_id',session()->get('id_petugas'))->first();
+        $grievance = Grievance::query()->where('grievance_id', $id)->first();
+        $data = [
+            'grievance' => $grievance,
+            'user' => $users,
+        ];
+        return view('GISView.petugas.detail_grievance',$data);
+    }
+
+    public function delete(Request $request){
+        $id = $request->id;
+        $is_delete = Grievance::query()->where('grievance_id', $id)->delete();
+        if(!$is_delete) {
+            Alert::error('Oops! Data Gagal Dihapus');
+            return redirect()->back();
+        }
+        Alert::success('Oops! Data Berhasil Dihapus');
         return redirect()->back();
     }
 }

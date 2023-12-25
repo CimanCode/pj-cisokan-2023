@@ -24,6 +24,13 @@ class Grievance extends Model
         'category',
         'locations',
         'complainants',
+        'kampung',
+        'desa',
+        'rt_rw',
+        'no_telp',
+        'no_ktp',
+        'jalur_aduan',
+        'tindak_lanjut',
         'image_location',
         'image_ttd',
     ];

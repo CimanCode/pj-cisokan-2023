@@ -140,115 +140,15 @@
                         </a>
                     </li>
                     <li class="md:text-base lg:px-4">
-                        <a href="{{route('riwayat')}}"><button type="button" x-on:click="showTable = !showTable" class="flex items-center w-full gap-4 px-2 py-2 hover:bg-slate-500 rounded-lg transition-all duration-200 ease-in-out text-slate-800 hover:text-white" x-on:click="isLoading = true">
+                        <button type="button" x-on:click="showTable = !showTable" class="flex items-center w-full gap-4 px-2 py-2 hover:bg-slate-500 rounded-lg transition-all duration-200 ease-in-out text-slate-800 hover:text-white" x-on:click="isLoading = true">
                             <i class="fa-solid fa-file text-[20px] w-6 text-center"></i><span class="text-lg font-semibold">Grievance</span>
-                        </button></a>
+                        </button>
                     </li>
                 </ul>
             </div>
         </aside>
 
-        <div id="formContent" class=" right-0  inset-y-0 shadow-2xl drop-shadow-lg h-screen bg-white z-30 sm:absolute lg:w-1/3 animate-slideIn hidden overflow-y-scroll">
-            <div class="fixed w-full z-50 bg-white p-4 text-center border-b border-slate-600 shadow-sm">
-                <h1 class="font-bold text-lg text-slate-600">GRIEVANCE <span class="text-cyan-600">FORM</span> GRM</h1>
-            </div><br><br><br>
-            <form id="overflowForm" method="POST" action="{{route('add_grievance')}}" class="" enctype="multipart/form-data">
-                @csrf
-                <div class="px-4 flex flex-col gap-2">
-                    <div class="flex gap-2 flex-col sm:flex-row w-full">
-                        <div class="flex flex-col w-full">
-                            <label for="dateInput" class="block text-sm font-medium text-slate-600">Hari/Tanggal</label>
-                            <div class="mt-1 relative">
-                                <input type="date" id="dateInput" name="tanggal" class="form-input px-2 py-1 block w-full leading-5 rounded-md border  focus:outline-none focus:ring-1 focus:ring-blue-400">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="flex gap-2 flex-col sm:flex-row w-full">
-                        <div class="flex flex-col w-full">
-                            <label for="dateInput" class="block text-sm font-medium text-slate-600">Lokasi</label>
-                            <div class="mt-1 relative">
-                                <input type="text" id="dateInput" name="locations" class="form-input px-2 py-1 block w-full leading-5 rounded-md border  focus:outline-none focus:ring-1 focus:ring-blue-400">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="flex gap-2">
-                        <div class="flex flex-col w-full">
-                            <label for="namaPelapor" class="font-semibold text-slate-600 text-base">Nama Pelapor</label>
-                            <input type="text" name="complainants" id="namaPelapor" class="px-2 py-1 border  focus:outline-none focus:ring-1 focus:ring-blue-400 rounded-md w-full uppercase">
-                        </div>
-                        <div class="flex flex-col w-full">
-                            <label for="inputRt" class="font-semibold text-slate-600 text-base">RT/RW</label>
-                            <input type="text" name="rt_rw" id="inputRt" class="px-2 py-1 border  focus:outline-none focus:ring-1 focus:ring-blue-400 rounded-md w-full uppercase">
-                        </div>
-                    </div>
-                    <div class="flex gap-2">
-                        <div class="flex flex-col w-full">
-                            <label for="inputDusun" class="font-semibold text-slate-600 text-base">Dusun/Kampung</label>
-                            <input type="text" name="kampung" id="inputDusun" class="px-2 py-1 border focus:outline-none focus:ring-1 focus:ring-blue-400 rounded-md w-full uppercase">
-                        </div>
-                        <div class="flex flex-col w-full">
-                            <label for="desa" class="font-semibold text-slate-600 text-base">Desa</label>
-                            <input type="text" name="desa" id="desa" class="px-2 py-1 border  focus:outline-none focus:ring-1 focus:ring-blue-400 rounded-md w-full uppercase">
-                        </div>
-                    </div>
-                    <div class="flex flex-col">
-                        <label for="noKTP" class="font-semibold text-slate-600 text-base">No. KTP</label>
-                        <input type="number" name="no_ktp" id="noKTP" class="px-2 py-1 border  focus:outline-none focus:ring-1 focus:ring-blue-400 rounded-md w-full uppercase">
-                    </div>
-                    <div class="flex flex-col">
-                        <label for="noKontak" class="font-semibold text-slate-600 text-base">No. Kontak Pelapor</label>
-                        <input type="number" name="no_telp" id="noKontak" class="px-2 py-1 border  focus:outline-none focus:ring-1 focus:ring-blue-400 rounded-md w-full uppercase">
-                    </div>
-                    <div class="flex flex-col">
-                        <label for="kategori" class="font-semibold text-slate-600 text-base">Kategori</label>
-                        <select name="category" id="" class="px-2 py-1 border  focus:outline-none focus:ring-1 focus:ring-blue-400 rounded-md w-full uppercase">
-                            <option value="LARAP">LARAP</option>
-                            <option value="GEMDER, KBG, DAN KTA">GEMDER, KBG, DAN KTA</option>
-                            <option value="ESIA, BMP, FPAP">ESIA, BMP, FPAP</option>
-                            <option value="COVID-19">COVID-19</option>
-                        </select>
-                    </div>
-                    <div class="flex flex-col">
-                        <label class="font-semibold text-slate-600 text-base">Uraian aduan</label>
-                        <textarea name="issue" id="" class="px-2 py-1 border  focus:outline-none focus:ring-1 focus:ring-blue-400 rounded-md w-full"></textarea>
-                    </div>
-                    <div class="flex flex-col">
-                        <label class="font-semibold text-slate-600 text-base">Jalur aduan </label>
-                        <input name="jalur_aduan" type="text" class="px-2 py-1 border  focus:outline-none focus:ring-1 focus:ring-blue-400 rounded-md w-full">
-                    </div>
-                    <div class="flex gap-2">
-                        <div class="flex flex-col w-full">
-                            <label class="font-semibold text-slate-600 text-base">Lattitude</label>
-                            <input type="text" name="lattitude" id="lat" class="px-2 py-1 border  focus:outline-none focus:ring-1 focus:ring-blue-400 rounded-md w-full uppercase">
-                        </div>
-                        <div class="flex flex-col w-full">
-                            <label class="font-semibold text-slate-600 text-base">Longitude</label>
-                            <input type="text" name="longitude" id="long" class="px-2 py-1 border  focus:outline-none focus:ring-1 focus:ring-blue-400 rounded-md w-full">
-                        </div>
-                    </div>
-                    <div class="flex flex-col">
-                        <label for="" class="font-semibold text-slate-600 text-base">Input File Image</label>
-                        <label class="flex border rounded-full">
-                            <span class="sr-only">Choose File</span>
-                            <input type="file" name="image_location"
-                                  class="block w-full text-[12px] text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
-                        </label>
-                    </div>
-                    <div class="block overflow-hidden">
-                        <div class="flex justify-between h-8">
-                            <input type="hidden" name="image_ttd" id="image_ttd_canvas" class="rounded-tl-none">
-                            <label for="signature_ttd">TTD</label>
-                            <button type="button" class="px-2 py-1 text-white bg-red-800 rounded hover:cursor-pointer text-base rounded-bl-none focus:outline-none" data-action="clear_ttd">CLEAR TTD</button>
-                        </div>
-                        <canvas id="signature_ttd" class="px-2 py-1 border  focus:outline-none focus:ring-1 focus:ring-blue-400 rounded-md shadow-md w-full"></canvas>
-                    </div>
-                    <div class="pb-2">
-                        <button type="submit" class="px-2 py-2 text-white bg-cyan-800 rounded w-full" data-action="save_image_ttd">SUBMIT</button>
-                    </div>
-                </div>
 
-            </form>
-        </div>
 
         <div id="btnAddEvent" class="fixed bottom-0 flex z-20 px-3 py-2 w-full justify-start items-center">
             <button id="myButton" class="px-3 py-3 rounded-full flex items-center justify-center bg-blue-600 text-slate-900 text-center drop-shadow-xl font-semibold focus:outline-none transition ease-out duration-300">
@@ -258,7 +158,150 @@
 
         <div id="divForm" class="flex justify-center relative">
             <div class="flex relative drop-shadow-xl z-10 w-full justify-center">
-                <button class="absolute z-20 left-5 -mt-10 py-1 px-3  sm:mt-12 bg-white text-slate-900 rounded text-center drop-shadow-xl font-semibold focus:outline-none " onclick="getCurentPosition()">Get Postion</button>
+                <div class="absolute z-20 w-[75%] h-[70%] top-[10%] overflow-x-auto shadow-md sm:rounded-lg">
+                    <div class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                        <div class="p-5 text-lg font-semibold flex justify-between text-gray-900 bg-white dark:text-white dark:bg-gray-800">
+                            <div class="flex items-center">
+                                <button ><a href="{{route("riwayat")}}"><i class="fa-solid p-3 hover:bg-gray-700 hover:text-white hover:ease-in-out duration-200 rounded-full border border-gray-700 fa-arrow-left"></i></a></button>
+                            </div>
+                            <div>
+                                <p class="font-bold">DETAIL <span class="text-blue-700">SUMMARY</span> GRIEVANCE</p>
+                                <p class="mt-1 text-sm font-normal text-gray-500 dark:text-gray-400">Riwayat Laporan/Keluhan Yang Terjadi Di Project PLTA</p>
+                            </div>
+                        </div>
+                        <div class="row-span-2 text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                            <div class="py-4 w-[50%]">
+                                <div class="flex px-5 text-base gap-14">
+                                    <div class="col-span-3">
+                                        Grievance Num
+                                    </div>
+                                    <div class="col-span-9">
+                                        : {{$grievance->grievance_num}}
+                                    </div>
+                                </div>
+                                <div class="flex px-5 text-base gap-14">
+                                    <div class="col-span-3">
+                                        Tanggal Laporan
+                                    </div>
+                                    <div class="col-span-9">
+                                        : {{$grievance->created_at}}
+                                    </div>
+                                </div>
+                                <div class="flex px-5 text-base gap-14">
+                                    <div class="col-span-3">
+                                        Lokasi
+                                    </div>
+                                    <div class="col-span-9">
+                                        : {{$grievance->locations}}
+                                    </div>
+                                </div>
+                                <div class="flex px-5 text-base gap-14">
+                                    <div class="col-span-3">
+                                        Kampung
+                                    </div>
+                                    <div class="col-span-9">
+                                        : {{$grievance->kampung}}
+                                    </div>
+                                </div>
+                                <div class="flex px-5 text-base gap-14">
+                                    <div class="col-span-3">
+                                        RT/RW
+                                    </div>
+                                    <div class="col-span-9">
+                                        : {{$grievance->rt_rw}}
+                                    </div>
+                                </div>
+                                <div class="flex px-5 text-base gap-14">
+                                    <div class="col-span-3">
+                                        Desa
+                                    </div>
+                                    <div class="col-span-9">
+                                        : {{$grievance->desa}}
+                                    </div>
+                                </div>
+                                <div class="flex px-5 text-base gap-14">
+                                    <div class="col-span-3">
+                                        Koordinate
+                                    </div>
+                                    <div class="col-span-9">
+                                        : {{$grievance->lattitude}} {{$grievance->longitude}}
+                                    </div>
+                                </div>
+                                <div class="flex px-5 text-base gap-14">
+                                    <div class="col-span-3">
+                                        Deskripsi Laporan
+                                    </div>
+                                    <div class="col-span-9">
+                                        : {{$grievance->issue}}
+                                    </div>
+                                </div>
+                                <div class="flex px-5 text-base gap-14">
+                                    <div class="col-span-3">
+                                        Status Laporan
+                                    </div>
+                                    @if($grievance->status == "Reported")
+                                    <div class="col-span-9 ">
+                                        : <span class="text-yellow-500">{{$grievance->status}}</span>
+                                    </div>
+                                    @endif
+                                </div>
+                                <div class="flex px-5 text-base gap-14">
+                                    <div class="col-span-3">
+                                        Kategori
+                                    </div>
+                                    <div class="col-span-9">
+                                        : {{$grievance->category}}
+                                    </div>
+                                </div>
+                                <div class="flex px-5 text-base gap-14">
+                                    <div class="col-span-3">
+                                        Jalur Laporan
+                                    </div>
+                                    <div class="col-span-9">
+                                        : {{$grievance->jalur_aduan}}
+                                    </div>
+                                </div>
+                                <div class="flex px-5 text-base gap-14">
+                                    <div class="col-span-3">
+                                        Pelapor
+                                    </div>
+                                    <div class="col-span-9">
+                                        : {{$grievance->complainants}}
+                                    </div>
+                                </div>
+                                <div class="flex px-5 text-base gap-14">
+                                    <div class="col-span-3">
+                                        No Handphone
+                                    </div>
+                                    <div class="col-span-9">
+                                        : {{$grievance->no_telp}}
+                                    </div>
+                                </div>
+                                <div class="flex px-5 text-base gap-14">
+                                    <div class="col-span-3">
+                                        No KTP
+                                    </div>
+                                    <div class="col-span-9">
+                                        : {{$grievance->no_ktp}}
+                                    </div>
+                                </div>
+                                <div class="flex px-5 text-base gap-14">
+                                    <div class="col-span-3">
+                                        Foto Lokasi
+                                    </div>
+                                    <div class="col-span-9">
+                                       <img src="{{$grievance->image_location}}" alt="" class="w-60">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="p-5 flex gap-2 justify-end">
+                                <button class="px-3 py-1 bg-yellow-600 text-white  rounded"><a href=""><i class="fa-solid fa-plus"></i> Pengembalian Aduan</a></button>
+                                <button class="px-3 py-1 bg-blue-600 text-white  rounded"><a href=""><i class="fa-solid fa-plus"></i> Penyelesaian Aduan</a></button>
+                                <button class="px-3 py-1 bg-green-600 text-white  rounded"><a href=""><i class="fa-solid fa-print"></i></a></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div id="map" class="rounded drop-shadow-lg h-screen w-full z-10 -mt-12 sm:mt-9">
                 </div>
                 <div class="coordinate absolute z-20 bottom-6 left-5 px-3  py-2 rounded bg-white drop-shadow-lg text-slate-900 text-base font-medium"></div>
@@ -271,48 +314,6 @@
     <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
     <script src="{{asset('L.KML.js')}}"></script>
     <script type="text/javascript">
-        // signature_pad
-        const signaturePad = document.getElementById("signaturePad");
-        const clearButton = document.querySelector("[data-action=clear_ttd]");
-        const saveButton = document.querySelector("[data-action=save_image_ttd]");
-        const signature_ttd = document.querySelector("canvas");
-        const signature_save = new SignaturePad(signature_ttd, {
-            minWidth: 0.5,
-            maxWidth: 1,
-        });
-
-        clearButton.addEventListener("click", function(e){
-            signature_save.clear();
-        })
-
-        saveButton.addEventListener("click", function(e){
-            if(signature_save.isEmpty()){
-                alert("provire signature first");
-                e.preventDefault();
-            } else {
-                const canvas = document.getElementById("signature_ttd");
-                const dataURL = canvas.toDataURL(canvas);
-                document.getElementById("image_ttd_canvas").value = dataURL
-                // console.log(image);
-            }
-        })
-        // const data_signature_pad = signature_pad.toDataURL();
-        // document.getElementById('image_ttd_canvas').value = data_signature_pad
-        // saveButton.addEventListener("click", function () {
-        // });
-        // if (!signature_pad.isEmpty()){
-        // }
-
-        // saveButton.addEventListener("click", function () {
-        //     if (!signature_pad.isEmpty()) {
-        //     const data_signature_pad = signature_pad.toDataURL();
-        //     savedSignature.innerHTML =
-        //         '<img src="' + data_signature_pad + '" alt="Tanda Tangan">';
-        //     } else {
-        //     alert("Tanda tangan kosong.");
-        //     }
-        //     document.getElementById('image_ttd_canvas').value = data_signature_pad
-        // });
 
         // map
         var map = L.map('map').setView([-7.419576565392435, 108.13217590348474], 15);
@@ -347,10 +348,6 @@
         // };
 
         var layers = L.control.layers(baseMaps).addTo(map);
-
-        @foreach ($grievance as $value)
-            L.marker([{{$value->lattitude}},{{$value->longitude}}], 15).addTo(map).bindPopup('Complainants : {{$value->complainants}} <br> Issue : {{$value->issue}} <br> Category : {{$value->category}} <br> Status : {{$value->status}} <img class="w-[500px]" src="{{$value->image_location}}"/> <br>'),
-        @endforeach
 
         function getCurentPosition(){
             // console.log('your location');
