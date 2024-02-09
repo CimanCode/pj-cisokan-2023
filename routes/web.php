@@ -43,3 +43,7 @@ Route::get('/admin', [AdminController::class, 'index'])->name('adminMap')->middl
 
 Route::get('/getKmlFile', [MapController::class, 'getMap']);
 
+Route::get('/master', [AdminController::class, 'master'])->name('adminMap')->middleware('isAdmin');
+Route::get('/laporanAdmin', [AdminController::class, 'laporan'])->name('adminMap')->middleware('isAdmin');
+
+
