@@ -17,8 +17,9 @@
     <script src="http://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
     <script src="https://ihcantabria.github.io/Leaflet.CanvasLayer.Field/dist/leaflet.canvaslayer.field.js"></script>
     <script src="{{asset('L.KML.js')}}"></script>
-    <link rel="stylesheet" href="{{asset('build/assets/app-e9522f14.css')}}">
-    @vite('resources/css/app.css')
+    <link rel="stylesheet" href="{{asset('build/assets/app-f641d9ac.css')}}">
+    <script src="{{asset('build/assets/app-0d91dc04.js')}}"></script>
+    {{-- @vite('resources/css/app.css') --}}
     <title>GIS CISOKAN</title>
 
     <style>

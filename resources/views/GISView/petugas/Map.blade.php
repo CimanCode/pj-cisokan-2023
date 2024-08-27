@@ -17,9 +17,8 @@
     <script src="http://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
     <script src="https://ihcantabria.github.io/Leaflet.CanvasLayer.Field/dist/leaflet.canvaslayer.field.js"></script>
     <script src="https://unpkg.com/leaflet-omnivore/leaflet-omnivore.min.js"></script>
-    <script src="{{asset("./KML/kml.js")}}"></script>
-    <link rel="stylesheet" href="{{asset('build/assets/app-e9522f14.css')}}">
-    @vite('resources/css/app.css')
+    <link rel="stylesheet" href="{{asset('build/assets/app-f641d9ac.css')}}">
+    {{-- @vite('resources/css/app.css') --}}
     <title>GIS CISOKAN</title>
 
     <style>
@@ -270,7 +269,8 @@
     <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-omnivore/0.3.4/leaflet-omnivore.min.js" integrity="sha512-55AYz+N6WyuiC8bRpQftNyCcSBCl3AEutoTsb4EeZuFVFP1+G4gll30iczAvvTpdL9nz48F7ZFEUavRUXp3FNA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
-    <script src="{{asset("./KML/kml.js")}}"></script>
+    {{-- <script src="{{asset('build/assets/app-0d91dc04.js')}}"></script> --}}
+    <script src="{{asset("KML/kml.js")}}"></script>
     <script type="text/javascript">
         // signature_pad
         const signaturePad = document.getElementById("signaturePad");
@@ -321,8 +321,8 @@
         var map = L.map('map').setView([-7.419576565392435, 108.13217590348474], 15);
         map.zoomControl.setPosition('bottomright');
 
-        var kmlLayer = omnivore.kml("{{asset('Layers.kml')}}").addTo(map);
-        console.log(kmlLayer);
+        // var kmlLayer = omnivore.kml("{{asset('Layers.kml')}}").addTo(map);
+        // console.log(kmlLayer);
 
         googleStreets = L.tileLayer('http://{s}.google.com/vt?lyrs=m&x={x}&y={y}&z={z}',{
             maxZoom: 20,
@@ -355,19 +355,19 @@
         var layers = L.control.layers(baseMaps).addTo(map);
 
         // KML
-        // fetch("{{asset('./example2.kml')}}")
-        //         .then(res => res.text())
-        //         .then(kmltext => {
-        //             // Create new kml overlay
-        //             const parser = new DOMParser();
-        //             const kml = parser.parseFromString(kmltext, 'text/xml');
-        //             const track = new L.KML(kml);
-        //             map.addLayer(track);
+        fetch("{{asset('./Layers.kml')}}")
+                .then(res => res.text())
+                .then(kmltext => {
+                    // Create new kml overlay
+                    const parser = new DOMParser();
+                    const kml = parser.parseFromString(kmltext, 'text/xml');
+                    const track = new L.KML(kml);
+                    map.addLayer(track);
 
-        //             // Adjust map to show the kml
-        //             const bounds = track.getBounds();
-        //             map.fitBounds(bounds);
-        //         });
+                    // Adjust map to show the kml
+                    const bounds = track.getBounds();
+                    map.fitBounds(bounds);
+                });
 
         @foreach ($grievance as $value)
             L.marker([{{$value->lattitude}},{{$value->longitude}}], 15).addTo(map).bindPopup('Complainants : {{$value->complainants}} <br> Issue : {{$value->issue}} <br> Category : {{$value->category}} <br> Status : {{$value->status}} <img class="w-[500px]" src="{{$value->image_location}}"/> <br>'),
