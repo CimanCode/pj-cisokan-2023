@@ -7,7 +7,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
     <link rel="stylesheet" href="{{asset('build/assets/app-f641d9ac.css')}}">
-    <script src="{{asset('build/assets/app-0d91dc04.js')}}"></script>
+    {{-- <script src="{{asset('build/assets/app-0d91dc04.js')}}"></script> --}}
+    <script src="{{asset('L.KML.js')}}"></script>
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     {{-- @vite('resources/css/app.css') --}}
     <title>GIS PEMILU</title>
@@ -24,7 +25,7 @@
         }))
         </script>
         <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
-    <div class="relative" x-data="dashboard">
+    <div class="" x-data="dashboard">
         @include('template.sidebar')
         @yield('content')
     </div>

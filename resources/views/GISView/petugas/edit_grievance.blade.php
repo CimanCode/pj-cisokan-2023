@@ -18,7 +18,7 @@
     <script src="https://ihcantabria.github.io/Leaflet.CanvasLayer.Field/dist/leaflet.canvaslayer.field.js"></script>
     <script src="{{asset('L.KML.js')}}"></script>
     <link rel="stylesheet" href="{{asset('build/assets/app-f641d9ac.css')}}">
-    <script src="{{asset('build/assets/app-0d91dc04.js')}}"></script>
+    {{-- <script src="{{asset('build/assets/app-0d91dc04.js')}}"></script> --}}
     {{-- @vite('resources/css/app.css') --}}
     <title>GIS CISOKAN</title>
 
@@ -161,9 +161,15 @@
             <div class="flex relative drop-shadow-xl z-10 w-full justify-center">
                 <div class="absolute z-20 w-[75%] h-[70%] top-[10%] overflow-x-auto shadow-md sm:rounded-lg">
                     <div class="shadow-2xl w-full drop-shadow-lg bg-white z-30 sm:absolute">
-                        <div class="fixed w-full z-50 bg-white p-4 text-center border-b border-slate-600 shadow-sm">
-                            <h1 class="font-bold text-lg text-slate-600">GRIEVANCE <span class="text-cyan-600">FORM</span> GRM</h1>
-                        </div><br><br><br>
+                        <div class="p-5 text-lg font-semibold flex justify-between text-gray-900 bg-white dark:text-white dark:bg-gray-800">
+                            <div class="flex items-center">
+                                <button ><a href="{{route("riwayat")}}"><i class="fa-solid p-3 hover:bg-gray-700 hover:text-white hover:ease-in-out duration-200 rounded-full border border-gray-700 fa-arrow-left"></i></a></button>
+                            </div>
+                            <div>
+                                <p class="font-bold">EDIT <span class="text-blue-700">FORM</span> GRIEVANCE</p>
+                                <p class="mt-1 text-sm font-normal text-gray-500 dark:text-gray-400">Riwayat Laporan/Keluhan Yang Terjadi Di Project PLTA</p>
+                            </div>
+                        </div>
                         <form id="overflowForm" method="POST" action="{{route('add_grievance')}}" class="" enctype="multipart/form-data">
                             @csrf
                             <div class="px-4 flex flex-col gap-2">

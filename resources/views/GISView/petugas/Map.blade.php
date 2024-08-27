@@ -32,7 +32,6 @@
 
         #divForm {
             margin-top: 50px;
-
         }
 
         /* Untuk Transition Form */
@@ -159,7 +158,7 @@
                         <div class="flex flex-col w-full">
                             <label for="dateInput" class="block text-sm font-medium text-slate-600">Hari/Tanggal</label>
                             <div class="mt-1 relative">
-                                <input type="date" id="dateInput" name="tanggal" class="form-input px-2 py-1 block w-full leading-5 rounded-md border  focus:outline-none focus:ring-1 focus:ring-blue-400">
+                                <input type="date" id="dateInput" name="tanggal" value="{{old('tanggal')}}" class="form-input px-2 py-1 block w-full leading-5 rounded-md border  focus:outline-none focus:ring-1 focus:ring-blue-400">
                             </div>
                         </div>
                     </div>
@@ -167,37 +166,37 @@
                         <div class="flex flex-col w-full">
                             <label for="dateInput" class="block text-sm font-medium text-slate-600">Lokasi</label>
                             <div class="mt-1 relative">
-                                <input type="text" id="dateInput" name="locations" class="form-input px-2 py-1 block w-full leading-5 rounded-md border  focus:outline-none focus:ring-1 focus:ring-blue-400">
+                                <input type="text" name="locations" value="{{old('locations')}}" class="form-input px-2 py-1 block w-full leading-5 rounded-md border  focus:outline-none focus:ring-1 focus:ring-blue-400">
                             </div>
                         </div>
                     </div>
                     <div class="flex gap-2">
                         <div class="flex flex-col w-full">
                             <label for="namaPelapor" class="font-semibold text-slate-600 text-base">Nama Pelapor</label>
-                            <input type="text" name="complainants" id="namaPelapor" class="px-2 py-1 border  focus:outline-none focus:ring-1 focus:ring-blue-400 rounded-md w-full uppercase">
+                            <input type="text" name="complainants" value="{{old('complainants')}}" id="namaPelapor" class="px-2 py-1 border  focus:outline-none focus:ring-1 focus:ring-blue-400 rounded-md w-full uppercase">
                         </div>
                         <div class="flex flex-col w-full">
                             <label for="inputRt" class="font-semibold text-slate-600 text-base">RT/RW</label>
-                            <input type="text" name="rt_rw" id="inputRt" class="px-2 py-1 border  focus:outline-none focus:ring-1 focus:ring-blue-400 rounded-md w-full uppercase">
+                            <input type="text" name="rt_rw" id="inputRt" value="{{old('rt_rw')}}" class="px-2 py-1 border  focus:outline-none focus:ring-1 focus:ring-blue-400 rounded-md w-full uppercase">
                         </div>
                     </div>
                     <div class="flex gap-2">
                         <div class="flex flex-col w-full">
                             <label for="inputDusun" class="font-semibold text-slate-600 text-base">Dusun/Kampung</label>
-                            <input type="text" name="kampung" id="inputDusun" class="px-2 py-1 border focus:outline-none focus:ring-1 focus:ring-blue-400 rounded-md w-full uppercase">
+                            <input type="text" name="kampung" id="inputDusun" value="{{old('kampung')}}" class="px-2 py-1 border focus:outline-none focus:ring-1 focus:ring-blue-400 rounded-md w-full uppercase">
                         </div>
                         <div class="flex flex-col w-full">
                             <label for="desa" class="font-semibold text-slate-600 text-base">Desa</label>
-                            <input type="text" name="desa" id="desa" class="px-2 py-1 border  focus:outline-none focus:ring-1 focus:ring-blue-400 rounded-md w-full uppercase">
+                            <input type="text" name="desa" id="desa" value="{{old('desa')}}" class="px-2 py-1 border  focus:outline-none focus:ring-1 focus:ring-blue-400 rounded-md w-full uppercase">
                         </div>
                     </div>
                     <div class="flex flex-col">
                         <label for="noKTP" class="font-semibold text-slate-600 text-base">No. KTP</label>
-                        <input type="number" name="no_ktp" id="noKTP" class="px-2 py-1 border  focus:outline-none focus:ring-1 focus:ring-blue-400 rounded-md w-full uppercase">
+                        <input type="number" name="no_ktp" id="noKTP" value="{{old('no_ktp')}}" class="px-2 py-1 border  focus:outline-none focus:ring-1 focus:ring-blue-400 rounded-md w-full uppercase">
                     </div>
                     <div class="flex flex-col">
                         <label for="noKontak" class="font-semibold text-slate-600 text-base">No. Kontak Pelapor</label>
-                        <input type="number" name="no_telp" id="noKontak" class="px-2 py-1 border  focus:outline-none focus:ring-1 focus:ring-blue-400 rounded-md w-full uppercase">
+                        <input type="number" name="no_telp" id="noKontak" value="{{old('no_telp')}}" class="px-2 py-1 border  focus:outline-none focus:ring-1 focus:ring-blue-400 rounded-md w-full uppercase">
                     </div>
                     <div class="flex flex-col">
                         <label for="kategori" class="font-semibold text-slate-600 text-base">Kategori</label>
@@ -210,20 +209,20 @@
                     </div>
                     <div class="flex flex-col">
                         <label class="font-semibold text-slate-600 text-base">Uraian aduan</label>
-                        <textarea name="issue" id="" class="px-2 py-1 border  focus:outline-none focus:ring-1 focus:ring-blue-400 rounded-md w-full"></textarea>
+                        <textarea name="issue" id="" class="px-2 py-1 border  focus:outline-none focus:ring-1 focus:ring-blue-400 rounded-md w-full">{{old('issue')}}</textarea>
                     </div>
                     <div class="flex flex-col">
                         <label class="font-semibold text-slate-600 text-base">Jalur aduan </label>
-                        <input name="jalur_aduan" type="text" class="px-2 py-1 border  focus:outline-none focus:ring-1 focus:ring-blue-400 rounded-md w-full">
+                        <input name="jalur_aduan" type="text" value="{{old('jalur_aduan')}}" class="px-2 py-1 border  focus:outline-none focus:ring-1 focus:ring-blue-400 rounded-md w-full">
                     </div>
                     <div class="flex gap-2">
                         <div class="flex flex-col w-full">
                             <label class="font-semibold text-slate-600 text-base">Lattitude</label>
-                            <input type="text" name="lattitude" id="lat" class="px-2 py-1 border  focus:outline-none focus:ring-1 focus:ring-blue-400 rounded-md w-full uppercase">
+                            <input type="text" name="lattitude" value="{{old('lattitude')}}" id="lat" class="px-2 py-1 border  focus:outline-none focus:ring-1 focus:ring-blue-400 rounded-md w-full uppercase">
                         </div>
                         <div class="flex flex-col w-full">
                             <label class="font-semibold text-slate-600 text-base">Longitude</label>
-                            <input type="text" name="longitude" id="long" class="px-2 py-1 border  focus:outline-none focus:ring-1 focus:ring-blue-400 rounded-md w-full">
+                            <input type="text" name="longitude" value="{{old('longitude')}}" id="long" class="px-2 py-1 border  focus:outline-none focus:ring-1 focus:ring-blue-400 rounded-md w-full">
                         </div>
                     </div>
                     <div class="flex flex-col">
@@ -246,11 +245,10 @@
                         <button type="submit" class="px-2 py-2 text-white bg-cyan-800 rounded w-full" data-action="save_image_ttd">SUBMIT</button>
                     </div>
                 </div>
-
             </form>
         </div>
 
-        <div id="btnAddEvent" class="absolute sm:fixed sm:bottom-0 flex z-40  px-3 py-2 w-full justify-start items-center">
+        <div id="btnAddEvent" class="absolute sm:fixed sm:bottom-0 flex z-40  px-3 py-2 justify-start items-center">
             <button id="myButton" class="px-6 sm:px-3 py-3 rounded-full flex items-center justify-center bg-blue-600 text-slate-900 text-center drop-shadow-xl font-semibold focus:outline-none transition ease-out duration-300">
                 <span id="buttonAdd" class="material-symbols-outlined text-transparent sm:text-white">add</span>
             </button>
@@ -501,23 +499,21 @@
 
 
 
-        document.getElementById('dateInput').addEventListener('change', function () {
-        // Get the selected date value
-        const selectedDate = this.value;
+        // document.getElementById('dateInput').addEventListener('change', function () {
+        // // Get the selected date value
+        // const selectedDate = this.value;
 
-        // Convert the selected date to the desired format (MM/DD/YY)
-        const formattedDate = new Date(selectedDate).toLocaleDateString('en-US', {
-            year: '2-digit',
-            month: '2-digit',
-            day: '2-digit'
-        });
+        // // Convert the selected date to the desired format (MM/DD/YY)
+        // const formattedDate = new Date(selectedDate).toLocaleDateString('en-US', {
+        //     year: '2-digit',
+        //     month: '2-digit',
+        //     day: '2-digit'
+        // });
 
-        // Set the formatted date back to the input
-        this.value = formattedDate;
-        });
+        // // Set the formatted date back to the input
+        // this.value = formattedDate;
+        // });
 
     </script>
-
-
 </body>
 </html>

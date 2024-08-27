@@ -65,7 +65,7 @@ class GrievanceController extends Controller
         if($validated->fails()){
             $error = implode(", ", array_map('implode', array_values($validated->errors()->messages())));
             Alert::error('Oops!', $error);
-            return redirect()->back();
+            return redirect()->back()->withInput();
         }
 
         $data = $validated->validate();
@@ -87,7 +87,6 @@ class GrievanceController extends Controller
 
         if($request->id){
             $is_updated = Grievance::query()->where('grievance_id', $request->id)->update($data);
-            dd($is_updated);
             if(!$is_updated){
                 Alert::error('Oops!, Data Gagal Diupdate');
                 return redirect()->back();
