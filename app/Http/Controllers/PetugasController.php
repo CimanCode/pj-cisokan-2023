@@ -22,7 +22,7 @@ class PetugasController extends Controller
 
     public function index(){
         $users = Users::query()->where('user_id',session()->get('id_petugas'))->first();
-        $data_grievance = Grievance::query()->where('user_id',$users->user_id)->get();
+        $data_grievance = Grievance::query()->where('user_id',$users->user_id)->paginate(10);
         $data = [
             'user' => $users,
             'data_grievance' => $data_grievance,

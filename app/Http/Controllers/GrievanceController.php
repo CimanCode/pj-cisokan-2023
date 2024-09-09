@@ -40,7 +40,7 @@ class GrievanceController extends Controller
             'category' => 'required',
             'locations' => 'required',
             'complainants' => 'required',
-            'image_location' => 'required|max:2048',
+            'image_location' => 'nullable|max:2048',
             'kampung' => 'sometimes|nullable',
             'desa' => 'sometimes|nullable',
             'rt_rw' => 'sometimes|nullable',
@@ -57,11 +57,12 @@ class GrievanceController extends Controller
             'category.required' => 'category is required',
             'locations.required' => 'locations is required',
             'complainants.required' => 'complainants is required',
-            'image_location.required' => 'image_location is required',
+            // 'image_location.required' => 'image_location is required',
             'image_location.max' => 'image_location max 2MB',
         ];
 
         $validated = Validator::make($request->all(),$rules,$message);
+
         if($validated->fails()){
             $error = implode(", ", array_map('implode', array_values($validated->errors()->messages())));
             Alert::error('Oops!', $error);
@@ -92,13 +93,13 @@ class GrievanceController extends Controller
                 return redirect()->back();
             }
             Alert::success('Data Berhasil Diupdate');
-            return redirect()->back();
+            return redirect(route('riwayat'));
         }
         $data['user_id'] = $user->user_id;
         $data['status'] = "Reported";
         Grievance::create($data);
         Alert::success('Data Successfully Created');
-        return redirect()->back();
+        return redirect(route('riwayat'));
     }
 
     public function detail(Request $request){

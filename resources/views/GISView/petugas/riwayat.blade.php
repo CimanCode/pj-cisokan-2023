@@ -149,8 +149,6 @@
             </div>
         </aside>
 
-
-
         <div id="btnAddEvent" class="fixed bottom-0 flex z-20 px-3 py-2 w-full justify-start items-center">
             <button id="myButton" class="px-3 py-3 rounded-full flex items-center justify-center bg-blue-600 text-slate-900 text-center drop-shadow-xl font-semibold focus:outline-none transition ease-out duration-300">
                 <span id="buttonAdd" class="material-symbols-outlined text-white">add</span>
@@ -230,6 +228,7 @@
                             @endforeach
                         </tbody>
                     </table>
+                    {{$data_grievance->links()}}
                 </div>
                 <div id="map" class="rounded drop-shadow-lg h-screen w-full z-10 -mt-12 sm:mt-9">
                 </div>

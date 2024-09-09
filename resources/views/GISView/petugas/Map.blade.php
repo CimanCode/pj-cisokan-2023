@@ -256,7 +256,7 @@
 
         <div id="divForm" class="flex justify-center relative">
             <div class="flex relative drop-shadow-xl z-10 w-full justify-center">
-                <button class="absolute z-20 left-5 -mt-10 py-1 px-3  sm:mt-12 bg-white text-slate-900 rounded text-center drop-shadow-xl font-semibold focus:outline-none " onclick="getCurentPosition()">Get Postion</button>
+                <button class="absolute z-20 left-5 -mt-10 py-1 px-3  sm:mt-12 bg-white text-slate-900 rounded text-center drop-shadow-xl font-semibold focus:outline-none" id="CurrentPosition" >Get Postion</button>
                 <div id="map" class="rounded drop-shadow-lg h-screen w-full z-10 -mt-12 sm:mt-9">
                 </div>
                 <div class="coordinate absolute z-20 bottom-6 left-5 px-3  py-2 rounded bg-white drop-shadow-lg text-slate-900 text-base font-medium"></div>
@@ -271,6 +271,7 @@
     <script src="{{asset("KML/kml.js")}}"></script>
     <script type="text/javascript">
         // signature_pad
+        const position = document.getElementById('CurrentPosition');
         const signaturePad = document.getElementById("signaturePad");
         const clearButton = document.querySelector("[data-action=clear_ttd]");
         const saveButton = document.querySelector("[data-action=save_image_ttd]");
@@ -371,8 +372,7 @@
             L.marker([{{$value->lattitude}},{{$value->longitude}}], 15).addTo(map).bindPopup('Complainants : {{$value->complainants}} <br> Issue : {{$value->issue}} <br> Category : {{$value->category}} <br> Status : {{$value->status}} <img class="w-[500px]" src="{{$value->image_location}}"/> <br>'),
         @endforeach
 
-        function getCurentPosition(){
-            // console.log('your location');
+        position.addEventListener('click', () => {
             setInterval(() => {
                 navigator.geolocation.getCurrentPosition(function (position) {
                     var currentLatLng = L.latLng(position.coords.latitude, position.coords.longitude);
@@ -387,9 +387,7 @@
                     alert("Unable to retrieve your location. Error: " + error.message);
                 });
             }, 500);
-        }
-
-
+        })
 
         function getPosition(position) {
             var lat = position.coords.latitude
