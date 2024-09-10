@@ -163,7 +163,11 @@
                     <div class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                         <div class="p-5 text-lg font-semibold flex justify-between text-gray-900 bg-white dark:text-white dark:bg-gray-800">
                             <div class="flex items-center">
+                                @if(session()->get('api_token'))
                                 <button ><a href="{{route("riwayat")}}"><i class="fa-solid p-3 hover:bg-gray-700 hover:text-white hover:ease-in-out duration-200 rounded-full border border-gray-700 fa-arrow-left"></i></a></button>
+                                @elseif(session()->get('id_role_admin'))
+                                <button ><a href="{{route("laporanAdmin")}}"><i class="fa-solid p-3 hover:bg-gray-700 hover:text-white hover:ease-in-out duration-200 rounded-full border border-gray-700 fa-arrow-left"></i></a></button>
+                                @endif
                             </div>
                             <div>
                                 <p class="font-bold">DETAIL <span class="text-blue-700">SUMMARY</span> GRIEVANCE</p>
