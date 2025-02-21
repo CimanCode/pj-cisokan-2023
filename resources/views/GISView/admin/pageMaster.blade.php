@@ -61,6 +61,9 @@
         </div>
         <br>
         <div class=" w-full overflow-x-auto shadow-md sm:rounded-lg px-6 pt-2 h-screen relative">
+            <div class="p-4">
+                <button class="p-2 rounded-md bg-blue-700 text-white" id="addmodal">Tambah Petugas</button>
+            </div>
             <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 relative">
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                     <tr>
@@ -71,109 +74,27 @@
                             E-mail
                         </th>
                         <th scope="col" class="px-6 py-3">
-                            Password
-                        </th>
-                        <th scope="col" class="px-6 py-3">
                             Action
                         </th>
                     </tr>
                 </thead>
                 <tbody>
+                    @foreach ($petugas as $val)
                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                         <th scope="row" class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
-                            <img class="w-10 h-10 rounded-full" src="./aang.png" alt="Jese image">
                             <div class="ps-3">
-                                <div class="text-base font-semibold">Neil Sims</div>
-                                <div class="font-normal text-gray-500">neil.sims@flowbite.com</div>
-                            </div>  
+                                <div class="text-base font-semibold">{{$val->username}}</div>
+                            </div>
                         </th>
                         <td class="px-6 py-4">
-                            <p>Admin@gmail.com</p>
-                        </td>
-                        <td class="px-6 py-4">
-                            <p>admin123</p>
+                            <p>{{$val->email}}</p>
                         </td>
                         <td class="px-6 py-4">
                             <button id="editModal" class="rounded-lg font-medium bg-yellow-500 px-2 py-2 text-white dark:text-blue-500 hover:underline">Edit user</button>
-                            
+                            <a href="{{route('deletepetugas', ['id' => $val->user_id])}}"><button class="rounded-lg font-medium bg-red-500 px-2 py-2 text-white dark:text-blue-500 hover:underline">Delete user</button></a>
                         </td>
                     </tr>
-                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                        <th scope="row" class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
-                            <img class="w-10 h-10 rounded-full" src="./aang.png" alt="Jese image">
-                            <div class="ps-3">
-                                <div class="text-base font-semibold">Neil Sims</div>
-                                <div class="font-normal text-gray-500">neil.sims@flowbite.com</div>
-                            </div>  
-                        </th>
-                        <td class="px-6 py-4">
-                            <p>Admin@gmail.com</p>
-                        </td>
-                        <td class="px-6 py-4">
-                            <p>admin123</p>
-                        </td>
-                        <td class="px-6 py-4">
-                            <button id="editModal" class="rounded-lg font-medium bg-yellow-500 px-2 py-2 text-white dark:text-blue-500 hover:underline">Edit user</button>
-                            
-                        </td>
-                    </tr>
-                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                        <th scope="row" class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
-                            <img class="w-10 h-10 rounded-full" src="./aang.png" alt="Jese image">
-                            <div class="ps-3">
-                                <div class="text-base font-semibold">Neil Sims</div>
-                                <div class="font-normal text-gray-500">neil.sims@flowbite.com</div>
-                            </div>  
-                        </th>
-                        <td class="px-6 py-4">
-                            <p>Admin@gmail.com</p>
-                        </td>
-                        <td class="px-6 py-4">
-                            <p>admin123</p>
-                        </td>
-                        <td class="px-6 py-4">
-                            <button id="editModal" class="rounded-lg font-medium bg-yellow-500 px-2 py-2 text-white dark:text-blue-500 hover:underline">Edit user</button>
-                            
-                        </td>
-                    </tr>
-                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                        <th scope="row" class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
-                            <img class="w-10 h-10 rounded-full" src="./aang.png" alt="Jese image">
-                            <div class="ps-3">
-                                <div class="text-base font-semibold">Neil Sims</div>
-                                <div class="font-normal text-gray-500">neil.sims@flowbite.com</div>
-                            </div>  
-                        </th>
-                        <td class="px-6 py-4">
-                            <p>Admin@gmail.com</p>
-                        </td>
-                        <td class="px-6 py-4">
-                            <p>admin123</p>
-                        </td>
-                        <td class="px-6 py-4">
-                            <button id="editModal" class="rounded-lg font-medium bg-yellow-500 px-2 py-2 text-white dark:text-blue-500 hover:underline">Edit user</button>
-                            
-                        </td>
-                    </tr>
-                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                        <th scope="row" class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
-                            <img class="w-10 h-10 rounded-full" src="./aang.png" alt="Jese image">
-                            <div class="ps-3">
-                                <div class="text-base font-semibold">Neil Sims</div>
-                                <div class="font-normal text-gray-500">neil.sims@flowbite.com</div>
-                            </div>  
-                        </th>
-                        <td class="px-6 py-4">
-                            <p>Admin@gmail.com</p>
-                        </td>
-                        <td class="px-6 py-4">
-                            <p>admin123</p>
-                        </td>
-                        <td class="px-6 py-4">
-                            <button id="editModal" class="rounded-lg font-medium bg-yellow-500 px-2 py-2 text-white dark:text-blue-500 hover:underline">Edit user</button>
-                            
-                        </td>
-                    </tr>
+                    @endforeach
                 </tbody>
             </table>
             <!-- Main modal -->
@@ -184,7 +105,7 @@
                         <!-- Modal header -->
                         <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
                             <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
-                                Edit Petugas
+                                Manage Petugas
                             </h3>
                             <button id="btnModalClose" type="button" class="text-gray-400 bg-red-500 -mt-[45px] -mr-[25px] rounded-full text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="crud-modal">
                                 <svg class="w-3 h-3 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
@@ -194,42 +115,34 @@
                             </button>
                         </div>
                         <!-- Modal body -->
-                        <form class="px-4 pb-4">
+                        <form class="px-4 pb-4" method="POST" action="{{route('addPetugas')}}">
+                            @csrf
                             <div class="grid gap-2 px-2 mb-4 w-full">
                                 <div class=" w-full ">
                                     <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
-                                    <input type="text" name="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Type product name" required="">
+                                    <input type="text" name="username" id="username" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Type product name" required="">
                                 </div>
                                 <div class="flex flex-col sm:flex-row gap-2 w-full ">
                                     <div class=" w-full">
                                         <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
-                                        <input type="text" name="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Type product name" required="">
+                                        <input type="text" name="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Type product name" required="">
                                     </div>
                                     <div class=" w-full">
                                         <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
-                                        <input type="password" name="name" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Type product name" required="">
+                                        <input type="password" name="password" id="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Type product name" required="">
                                     </div>
                                 </div>
                             </div>
                             <div class="px-2 pt-4 flex gap-2 items-center justify-between">
-
                                 <button type="submit" class=" text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-2 sm:px-8 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                                     <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
-                                    Simpan 
-                                </button>
-                                <button type="submit" class=" text-white inline-flex items-center bg-yellow-500 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-2 sm:px-8 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                                    <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
-                                    Edit 
-                                </button>
-                                <button type="submit" class=" text-white inline-flex items-center bg-red-500 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-2 sm:px-8 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                                    <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
-                                    Delete 
+                                    Simpan
                                 </button>
                             </div>
                         </form>
                     </div>
                 </div>
-            </div> 
+            </div>
         </div>
     </main>
     <div id="blockLayar" class="hidden top-0 w-full h-full bg-black opacity-50 z-40 absolute transition duration-700 ease-in-out"></div>
@@ -248,21 +161,28 @@
                 pumped.classList.remove('hidden');
                 halloP.classList.remove('hidden');
             }
-            
-        }    
+
+        }
         window.addEventListener('load', resfonsiveNavbar);
         window.addEventListener('resize', resfonsiveNavbar);
 
         const btnModalClose = document.getElementById('btnModalClose');
         const editModal = document.getElementById('editModal');
+        const addmodal = document.getElementById('addmodal');
         const crudModal = document.getElementById('crud-modal');
         const blockLayar = document.getElementById('blockLayar');
         btnModalClose.addEventListener('click', () => {
             crudModal.classList.toggle('-mt-[500px]');
             blockLayar.classList.add('hidden')
-            
+
         })
         editModal.addEventListener('click', () => {
+            crudModal.classList.toggle('-mt-[500px]');
+            crudModal.classList.add('opacity-100');
+            blockLayar.classList.remove('hidden')
+        })
+
+        addmodal.addEventListener('click', () => {
             crudModal.classList.toggle('-mt-[500px]');
             crudModal.classList.add('opacity-100');
             blockLayar.classList.remove('hidden')

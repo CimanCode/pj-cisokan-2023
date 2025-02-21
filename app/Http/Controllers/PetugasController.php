@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Users;
 use App\Models\Grievance;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Session;
 
 class PetugasController extends Controller
@@ -33,5 +34,11 @@ class PetugasController extends Controller
     public function getFileKmz(){
         $kmz = file_get_contents("Peta_Lokasi_Proyek.kmz",true);
         return response()->json($kmz);
+    }
+
+    public function downloadlaporan($id){
+        $data = Grievance::query()->where('grievance_id', $id)->first();
+        $pdf = Pdf::loadView('GISView.petugas.laporanpdf', ['data' => $data]);
+        return $pdf->stream();
     }
 }

@@ -145,6 +145,14 @@
                             <i class="fa-solid fa-file text-[20px] w-6 text-center"></i><span class="text-lg font-semibold">Grievance</span>
                         </button>
                     </li>
+                    @if (session()->has('logged','id_role_admin'))
+                    <li class="md:text-base lg:px-4">
+                        <a href="{{route('listpetugas')}}" class="flex items-center w-full gap-7 py-2 px-4 active:bg-slate-600 hover:bg-slate-500 rounded-lg transition-all duration-200 ease-in-out text-slate-800 hover:text-white"
+                        x-on:click="isLoading = true">
+                            <i class="fa-solid fa-user text-[20px]  text-center"></i><span class="text-lg font-semibold ">Petugas</span>
+                        </a>
+                    </li>
+                    @endif
                 </ul>
             </div>
         </aside>
@@ -163,7 +171,11 @@
                     <div class="shadow-2xl w-full drop-shadow-lg bg-white z-30 sm:absolute">
                         <div class="p-5 text-lg font-semibold flex justify-between text-gray-900 bg-white dark:text-white dark:bg-gray-800">
                             <div class="flex items-center">
+                                @if(session()->get('api_token'))
                                 <button ><a href="{{route("riwayat")}}"><i class="fa-solid p-3 hover:bg-gray-700 hover:text-white hover:ease-in-out duration-200 rounded-full border border-gray-700 fa-arrow-left"></i></a></button>
+                                @elseif(session()->get('id_role_admin'))
+                                <button ><a href="{{route("laporanAdmin")}}"><i class="fa-solid p-3 hover:bg-gray-700 hover:text-white hover:ease-in-out duration-200 rounded-full border border-gray-700 fa-arrow-left"></i></a></button>
+                                @endif
                             </div>
                             <div>
                                 <p class="font-bold">EDIT <span class="text-blue-700">FORM</span> GRIEVANCE</p>
@@ -297,15 +309,15 @@
         })
 
         saveButton.addEventListener("click", function(e){
-            if(signature_save.isEmpty()){
-                alert("provire signature first");
-                e.preventDefault();
-            } else {
-                const canvas = document.getElementById("signature_ttd");
-                const dataURL = canvas.toDataURL(canvas);
-                document.getElementById("image_ttd_canvas").value = dataURL
-                // console.log(image);
-            }
+            const canvas = document.getElementById("signature_ttd");
+            const dataURL = canvas.toDataURL(canvas);
+            document.getElementById("image_ttd_canvas").value = dataURL
+            // console.log(image);
+            // if(signature_save.isEmpty()){
+            //     alert("provire signature first");
+            //     e.preventDefault();
+            // } else {
+            // }
         })
 
         // map
@@ -486,20 +498,20 @@
 
 
 
-        document.getElementById('dateInput').addEventListener('change', function () {
-        // Get the selected date value
-        const selectedDate = this.value;
+        // document.getElementById('dateInput').addEventListener('change', function () {
+        // // Get the selected date value
+        // const selectedDate = this.value;
 
-        // Convert the selected date to the desired format (MM/DD/YY)
-        const formattedDate = new Date(selectedDate).toLocaleDateString('en-US', {
-            year: '2-digit',
-            month: '2-digit',
-            day: '2-digit'
-        });
+        // // Convert the selected date to the desired format (MM/DD/YY)
+        // const formattedDate = new Date(selectedDate).toLocaleDateString('en-US', {
+        //     year: '2-digit',
+        //     month: '2-digit',
+        //     day: '2-digit'
+        // });
 
-        // Set the formatted date back to the input
-        this.value = formattedDate;
-        });
+        // // Set the formatted date back to the input
+        // this.value = formattedDate;
+        // });
 
     </script>
 

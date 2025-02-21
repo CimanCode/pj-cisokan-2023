@@ -286,35 +286,16 @@
         })
 
         saveButton.addEventListener("click", function(e){
-            if(signature_save.isEmpty()){
-                alert("provire signature first");
-                e.preventDefault();
-            } else {
-                const canvas = document.getElementById("signature_ttd");
-                const dataURL = canvas.toDataURL(canvas);
-                document.getElementById("image_ttd_canvas").value = dataURL
-                // console.log(image);
-            }
+            const canvas = document.getElementById("signature_ttd");
+            const dataURL = canvas.toDataURL(canvas);
+            document.getElementById("image_ttd_canvas").value = dataURL
+            // if(signature_save.isEmpty()){
+            //     alert("provire signature first");
+            //     e.preventDefault();
+            // } else {
+            //     // console.log(image);
+            // }
         });
-
-
-        // const data_signature_pad = signature_pad.toDataURL();
-        // document.getElementById('image_ttd_canvas').value = data_signature_pad
-        // saveButton.addEventListener("click", function () {
-        // });
-        // if (!signature_pad.isEmpty()){
-        // }
-
-        // saveButton.addEventListener("click", function () {
-        //     if (!signature_pad.isEmpty()) {
-        //     const data_signature_pad = signature_pad.toDataURL();
-        //     savedSignature.innerHTML =
-        //         '<img src="' + data_signature_pad + '" alt="Tanda Tangan">';
-        //     } else {
-        //     alert("Tanda tangan kosong.");
-        //     }
-        //     document.getElementById('image_ttd_canvas').value = data_signature_pad
-        // });
 
         // map
         var map = L.map('map').setView([-7.419576565392435, 108.13217590348474], 15);
@@ -369,7 +350,7 @@
                 });
 
         @foreach ($grievance as $value)
-            L.marker([{{$value->lattitude}},{{$value->longitude}}], 15).addTo(map).bindPopup('Complainants : {{$value->complainants}} <br> Issue : {{$value->issue}} <br> Category : {{$value->category}} <br> Status : {{$value->status}} <img class="w-[500px]" src="{{$value->image_location}}"/> <br>'),
+            L.marker([{{$value->lattitude}},{{$value->longitude}}], 15).addTo(map).bindPopup('Complainants : {{$value->complainants}} <br> Issue : {{$value->issue}} <br> Category : {{$value->category}} <br> Status : {{$value->status}} <br> Rencana Tindak Lanjut : {{$value->tindak_lanjut ?? "Sedan Ditinjau"}}  <img class="w-[500px]" src="{{$value->image_location}}"/> <br>'),
         @endforeach
 
         position.addEventListener('click', () => {

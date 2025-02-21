@@ -34,12 +34,12 @@ class GrievanceController extends Controller
     public function create_grievance(Request $request){
         $user = Users::where('user_id', Session::get('id_petugas'))->first();
         $rules = [
-            'issue' => 'required',
-            'lattitude' => 'required',
-            'longitude' => 'required',
-            'category' => 'required',
-            'locations' => 'required',
-            'complainants' => 'required',
+            'issue' => 'nullable',
+            'lattitude' => 'nullable',
+            'longitude' => 'nullable',
+            'category' => 'nullable',
+            'locations' => 'nullable',
+            'complainants' => 'nullable',
             'image_location' => 'nullable|max:2048',
             'kampung' => 'sometimes|nullable',
             'desa' => 'sometimes|nullable',
@@ -51,13 +51,6 @@ class GrievanceController extends Controller
         ];
 
         $message = [
-            'issue.required' => 'Issue is required',
-            'lattitude.required' => 'lattitude is required',
-            'longitude.required' => 'longitude is required',
-            'category.required' => 'category is required',
-            'locations.required' => 'locations is required',
-            'complainants.required' => 'complainants is required',
-            // 'image_location.required' => 'image_location is required',
             'image_location.max' => 'image_location max 2MB',
         ];
 

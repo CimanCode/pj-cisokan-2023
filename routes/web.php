@@ -32,6 +32,7 @@ Route::post('/login',[AuthController::class, 'login'])->name('login');
 
 Route::get('/petugasmap', [PetugasController::class, 'mappetugas'])->name('petugasmap')->middleware('isPetugas');
 Route::get('/riwayat', [PetugasController::class, 'index'])->name('riwayat')->middleware('isPetugas');
+Route::get('/downloadlaporan/{id}', [PetugasController::class, 'downloadlaporan'])->name('downloadlaporan');
 
 Route::post('/addGrievance',[GrievanceController::class, 'create_grievance'])->name('add_grievance')->middleware('isPetugas');
 Route::any('/edit',[GrievanceController::class, 'edit'])->name('edit_grievance')->middleware('isPetugas');
@@ -43,7 +44,10 @@ Route::get('/admin', [AdminController::class, 'index'])->name('adminMap')->middl
 
 Route::get('/getKmlFile', [MapController::class, 'getMap']);
 
-Route::get('/master', [AdminController::class, 'master'])->name('adminMap')->middleware('isAdmin');
+Route::get('/listpetugas', [AdminController::class, 'master'])->name('listpetugas')->middleware('isAdmin');
 Route::get('/laporanAdmin', [AdminController::class, 'laporan'])->name('laporanAdmin')->middleware('isAdmin');
+Route::post('/addPetugas', [AdminController::class, 'addPetugas'])->name('addPetugas')->middleware('isAdmin');
+Route::get('/deletepetugas/{id}', [AdminController::class, 'deletepetugas'])->name('deletepetugas')->middleware('isAdmin');
+Route::post('/updateProgress', [AdminController::class, 'updateProgress'])->name('updateProgress')->middleware('isAdmin');
 
 

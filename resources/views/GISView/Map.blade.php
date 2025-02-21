@@ -18,7 +18,7 @@
         @include('sweetalert::alert')
         <div class="p-4  flex justify-between bg-white shadow-lg border-b-2 border-slate-500">
             <h1 class="font-bold text-2xl text-slate-700">
-                <span class="text-blue-600">GRM PLT </span> PUMPED STORAGE
+                <span class="text-blue-600">GRM PLTA UPPER CISOKAN </span> PUMPED STORAGE 4X260 MW
             </h1>
             <button type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="px-3 py-1 bg-blue-600 text-white text-lg font-bold rounded-md shadow-md">
                 LOGIN

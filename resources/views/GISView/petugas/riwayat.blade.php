@@ -198,7 +198,7 @@
                                     {{$value->grievance_num}}
                                 </th>
                                 <td class="px-6 py-4">
-                                    {{$value->created_at}}
+                                    {{ \Carbon\Carbon::parse($value->tanggal)->translatedFormat('d F Y') }}
                                 </td>
                                 <td class="px-6 py-4">
                                     {{$value->issue}}

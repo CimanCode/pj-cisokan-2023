@@ -14,6 +14,7 @@
     <title>GIS PEMILU</title>
 </head>
 <body>
+    @include('sweetalert::alert')
     <script>
         Alpine.data('dashboard', () => ({
             showSidebar: false,

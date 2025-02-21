@@ -33,6 +33,7 @@ class Grievance extends Model
         'tindak_lanjut',
         'image_location',
         'image_ttd',
+        'tanggal'
     ];
 
     protected static function boot(){

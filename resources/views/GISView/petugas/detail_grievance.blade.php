@@ -145,6 +145,14 @@
                             <i class="fa-solid fa-file text-[20px] w-6 text-center"></i><span class="text-lg font-semibold">Grievance</span>
                         </button>
                     </li>
+                    @if (session()->has('logged','id_role_admin'))
+                    <li class="md:text-base lg:px-4">
+                        <a href="{{route('listpetugas')}}" class="flex items-center w-full gap-7 py-2 px-4 active:bg-slate-600 hover:bg-slate-500 rounded-lg transition-all duration-200 ease-in-out text-slate-800 hover:text-white"
+                        x-on:click="isLoading = true">
+                            <i class="fa-solid fa-user text-[20px]  text-center"></i><span class="text-lg font-semibold ">Petugas</span>
+                        </a>
+                    </li>
+                    @endif
                 </ul>
             </div>
         </aside>
@@ -175,144 +183,171 @@
                             </div>
                         </div>
                         <div class="row-span-2 text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                            <div class="py-4 w-[50%]">
+                            <div class="py-4 w-[100%]">
                                 <div class="flex px-5 text-base gap-14">
-                                    <div class="col-span-3">
-                                        Grievance Num
+                                    <div class="col-span-6">
+                                        <ul>
+                                            <li>Grievance Num </li>
+                                        </ul>
+                                        <ul>
+                                            <li>Tanggal Laporan </li>
+                                        </ul>
+                                        <ul>
+                                            <li>Lokasi </li>
+                                        </ul>
+                                        <ul>
+                                            <li>Kampung </li>
+                                        </ul>
+                                        <ul>
+                                            <li>RT/RW </li>
+                                        </ul>
+                                        <ul>
+                                            <li>Desa </li>
+                                        </ul>
+                                        <ul>
+                                            <li>Koordinate </li>
+                                        </ul>
+                                        <ul>
+                                            <li>Deskripsi Laporan </li>
+                                        </ul>
+                                        <ul>
+                                            <li>Status Laporan </li>
+                                        </ul>
+                                        <ul>
+                                            <li>Kategori </li>
+                                        </ul>
+                                        <ul>
+                                            <li>Jalur Laporan </li>
+                                        </ul>
+                                        <ul>
+                                            <li>Pelapor </li>
+                                        </ul>
+                                        <ul>
+                                            <li>No. Handphone </li>
+                                        </ul>
+                                        <ul>
+                                            <li>No. KTP </li>
+                                        </ul>
+                                        <ul>
+                                            <li>Foto Lokasi </li>
+                                        </ul>
                                     </div>
-                                    <div class="col-span-9">
-                                        : {{$grievance->grievance_num}}
-                                    </div>
-                                </div>
-                                <div class="flex px-5 text-base gap-14">
-                                    <div class="col-span-3">
-                                        Tanggal Laporan
-                                    </div>
-                                    <div class="col-span-9">
-                                        : {{$grievance->created_at}}
-                                    </div>
-                                </div>
-                                <div class="flex px-5 text-base gap-14">
-                                    <div class="col-span-3">
-                                        Lokasi
-                                    </div>
-                                    <div class="col-span-9">
-                                        : {{$grievance->locations}}
-                                    </div>
-                                </div>
-                                <div class="flex px-5 text-base gap-14">
-                                    <div class="col-span-3">
-                                        Kampung
-                                    </div>
-                                    <div class="col-span-9">
-                                        : {{$grievance->kampung}}
-                                    </div>
-                                </div>
-                                <div class="flex px-5 text-base gap-14">
-                                    <div class="col-span-3">
-                                        RT/RW
-                                    </div>
-                                    <div class="col-span-9">
-                                        : {{$grievance->rt_rw}}
-                                    </div>
-                                </div>
-                                <div class="flex px-5 text-base gap-14">
-                                    <div class="col-span-3">
-                                        Desa
-                                    </div>
-                                    <div class="col-span-9">
-                                        : {{$grievance->desa}}
-                                    </div>
-                                </div>
-                                <div class="flex px-5 text-base gap-14">
-                                    <div class="col-span-3">
-                                        Koordinate
-                                    </div>
-                                    <div class="col-span-9">
-                                        : {{$grievance->lattitude}} {{$grievance->longitude}}
-                                    </div>
-                                </div>
-                                <div class="flex px-5 text-base gap-14">
-                                    <div class="col-span-3">
-                                        Deskripsi Laporan
-                                    </div>
-                                    <div class="col-span-9">
-                                        : {{$grievance->issue}}
-                                    </div>
-                                </div>
-                                <div class="flex px-5 text-base gap-14">
-                                    <div class="col-span-3">
-                                        Status Laporan
-                                    </div>
-                                    @if($grievance->status == "Reported")
-                                    <div class="col-span-9 ">
-                                        : <span class="text-yellow-500">{{$grievance->status}}</span>
-                                    </div>
-                                    @endif
-                                </div>
-                                <div class="flex px-5 text-base gap-14">
-                                    <div class="col-span-3">
-                                        Kategori
-                                    </div>
-                                    <div class="col-span-9">
-                                        : {{$grievance->category}}
-                                    </div>
-                                </div>
-                                <div class="flex px-5 text-base gap-14">
-                                    <div class="col-span-3">
-                                        Jalur Laporan
-                                    </div>
-                                    <div class="col-span-9">
-                                        : {{$grievance->jalur_aduan}}
-                                    </div>
-                                </div>
-                                <div class="flex px-5 text-base gap-14">
-                                    <div class="col-span-3">
-                                        Pelapor
-                                    </div>
-                                    <div class="col-span-9">
-                                        : {{$grievance->complainants}}
-                                    </div>
-                                </div>
-                                <div class="flex px-5 text-base gap-14">
-                                    <div class="col-span-3">
-                                        No Handphone
-                                    </div>
-                                    <div class="col-span-9">
-                                        : {{$grievance->no_telp}}
-                                    </div>
-                                </div>
-                                <div class="flex px-5 text-base gap-14">
-                                    <div class="col-span-3">
-                                        No KTP
-                                    </div>
-                                    <div class="col-span-9">
-                                        : {{$grievance->no_ktp}}
-                                    </div>
-                                </div>
-                                <div class="flex px-5 text-base gap-14">
-                                    <div class="col-span-3">
-                                        Foto Lokasi
-                                    </div>
-                                    <div class="col-span-9">
-                                       <img src="{{$grievance->image_location}}" alt="" class="w-60">
+                                    <div class="col-span-6">
+                                        <ul>
+                                            <li>: {{$grievance->grievance_num}}</li>
+                                        </ul>
+                                        <ul>
+                                            <li>: {{$grievance->created_at}}</li>
+                                        </ul>
+                                        <ul>
+                                            <li>: {{$grievance->locations}}</li>
+                                        </ul>
+                                        <ul>
+                                            <li>: {{$grievance->kampung}}</li>
+                                        </ul>
+                                        <ul>
+                                            <li>: {{$grievance->rt_rw}}</li>
+                                        </ul>
+                                        <ul>
+                                            <li>: {{$grievance->desa}}</li>
+                                        </ul>
+                                        <ul>
+                                            <li>: {{$grievance->lattitude}}, {{$grievance->longitude}}</li>
+                                        </ul>
+                                        <ul>
+                                            <li>: {{$grievance->issue}}</li>
+                                        </ul>
+                                        <ul>
+                                            @if($grievance->status == "Reported")
+                                                <li>: <span class="text-yellow-500">{{$grievance->status}}</span></li>
+                                            @elseif($grievance->status == "proses")
+                                                <li>: <span class="text-blue-500">{{$grievance->status}}</span></li>
+                                            @endif
+                                        </ul>
+                                        <ul>
+                                            <li>: {{$grievance->category}}</li>
+                                        </ul>
+                                        <ul>
+                                            <li>: {{$grievance->jalur_aduan}}</li>
+                                        </ul>
+                                        <ul>
+                                            <li>: {{$grievance->complainants}}</li>
+                                        </ul>
+                                        <ul>
+                                            <li>: {{$grievance->no_telp}}</li>
+                                        </ul>
+                                        <ul>
+                                            <li>: {{$grievance->no_ktp}}</li>
+                                        </ul>
+                                        <ul>
+                                            <li>: <img src="{{$grievance->image_location}}" alt="" class="w-60"></li>
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
                             <div class="p-5 flex gap-2 justify-end">
-                                <button class="px-3 py-1 bg-yellow-600 text-white  rounded"><a href=""><i class="fa-solid fa-plus"></i> Pengembalian Aduan</a></button>
-                                <button class="px-3 py-1 bg-blue-600 text-white  rounded"><a href=""><i class="fa-solid fa-plus"></i> Penyelesaian Aduan</a></button>
-                                <button class="px-3 py-1 bg-green-600 text-white  rounded"><a href=""><i class="fa-solid fa-print"></i></a></button>
+                                @if(session()->get('id_role_admin'))
+                                <button id="editmodal" class="px-3 py-1 bg-blue-600 text-white  rounded"><i class="fa-solid fa-plus"></i> Update Status & Tindak Lanjut</button>
+                                <button class="px-3 py-1 bg-green-600 text-white  rounded"><a href="{{route('downloadlaporan', ['id' => $grievance->grievance_id])}}"><i class="fa-solid fa-print"></i></a></button>
+                                @endif
                             </div>
                         </div>
+                         <!-- Main modal -->
+                        </div>
+                    </div>
+                    <div id="map" class="rounded drop-shadow-lg h-screen w-full z-10 -mt-12 sm:mt-9">
+                    </div>
+                    <div class="coordinate absolute z-20 bottom-6 left-5 px-3  py-2 rounded bg-white drop-shadow-lg text-slate-900 text-base font-medium"></div>
+                </div>
+            </div>
+            <div id="crud-modal" tabindex="-1" aria-hidden="true" class="-mt-[500px] z-50 fixed top-0 left-1/2 transform -translate-x-1/2 w-full sm:w-[70%] lg:w-1/2 transition-all duration-500">
+                <div class="relative px-4 w-full max-h-full">
+                    <!-- Modal content -->
+                    <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                        <!-- Modal header -->
+                        <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                            <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+                                Update Proses Penanganan
+                            </h3>
+                            <button id="btnModalClose" type="button" class="text-gray-400 bg-red-500 -mt-[45px] -mr-[25px] rounded-full text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="crud-modal">
+                                <svg class="w-3 h-3 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                                </svg>
+                                <span class="sr-only">Close modal</span>
+                            </button>
+                        </div>
+                        <!-- Modal body -->
+                        <form class="px-4 pb-4" method="POST" action="{{route('updateProgress')}}">
+                            @csrf
+                            <div class="grid gap-2 px-2 mb-4 w-full">
+                                <div class=" w-full ">
+                                    <input type="hidden" name="grievance_id" value="{{$grievance->grievance_id}}">
+                                    <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
+                                    <select name="status" id="" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" required="">
+                                        <option value="proses">Dalam Proses</option>
+                                        <option value="finish">Selesai</option>
+                                    </select>
+                                    {{-- <input type="text" name="username" id="username" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Type product name" required=""> --}}
+                                </div>
+                                <div class="flex flex-col sm:flex-row gap-2 w-full ">
+                                    <div class=" w-full">
+                                        <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tindak Lanjut</label>
+                                        <textarea name="tindak_lanjut" id="tindak_lanjut" cols="30" rows="10" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Type product name" required=""></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="px-2 pt-4 flex gap-2 items-center justify-between">
+                                <button type="submit" class=" text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-2 sm:px-8 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                    <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
+                                    Simpan
+                                </button>
+                            </div>
+                        </form>
                     </div>
                 </div>
-                <div id="map" class="rounded drop-shadow-lg h-screen w-full z-10 -mt-12 sm:mt-9">
-                </div>
-                <div class="coordinate absolute z-20 bottom-6 left-5 px-3  py-2 rounded bg-white drop-shadow-lg text-slate-900 text-base font-medium"></div>
             </div>
-        </div>
     </div>
+    <div id="blockLayar" class="hidden top-0 w-full h-full bg-black opacity-50 z-40 absolute transition duration-700 ease-in-out"></div>
     <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
     <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-omnivore/0.3.4/leaflet-omnivore.min.js" integrity="sha512-55AYz+N6WyuiC8bRpQftNyCcSBCl3AEutoTsb4EeZuFVFP1+G4gll30iczAvvTpdL9nz48F7ZFEUavRUXp3FNA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -496,22 +531,40 @@
         window.addEventListener('load', removeHiddenClass);
         window.addEventListener('resize', removeHiddenClass);
 
+        const btnModalClose = document.getElementById('btnModalClose');
+        const editModal = document.getElementById('editmodal');
+        const crudModal = document.getElementById('crud-modal');
+        const blockLayar = document.getElementById('blockLayar');
+        btnModalClose.addEventListener('click', () => {
+            crudModal.classList.toggle('-mt-[500px]');
+            blockLayar.classList.add('hidden');
+            crudModal.classList.add('top-0');
+            crudModal.classList.remove('top-48');
 
+        })
 
-        document.getElementById('dateInput').addEventListener('change', function () {
-        // Get the selected date value
-        const selectedDate = this.value;
+        editModal.addEventListener('click', () => {
+            crudModal.classList.toggle('-mt-[500px]');
+            crudModal.classList.add('opacity-100');
+            crudModal.classList.remove('top-0');
+            crudModal.classList.add('top-48');
+            blockLayar.classList.remove('hidden')
+        })
 
-        // Convert the selected date to the desired format (MM/DD/YY)
-        const formattedDate = new Date(selectedDate).toLocaleDateString('en-US', {
-            year: '2-digit',
-            month: '2-digit',
-            day: '2-digit'
-        });
+        // document.getElementById('dateInput').addEventListener('change', function () {
+        // // Get the selected date value
+        // const selectedDate = this.value;
 
-        // Set the formatted date back to the input
-        this.value = formattedDate;
-        });
+        // // Convert the selected date to the desired format (MM/DD/YY)
+        // const formattedDate = new Date(selectedDate).toLocaleDateString('en-US', {
+        //     year: '2-digit',
+        //     month: '2-digit',
+        //     day: '2-digit'
+        // });
+
+        // // Set the formatted date back to the input
+        // this.value = formattedDate;
+        // });
 
     </script>
 

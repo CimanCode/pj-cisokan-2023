@@ -19,7 +19,7 @@
                 </a>
             </li>
             <li class="">
-                <a href="/master" class="flex items-center w-full gap-7 py-2 px-4 active:bg-slate-600 hover:bg-slate-500 rounded-lg transition-all duration-200 ease-in-out text-slate-800 hover:text-white"
+                <a href="{{route('listpetugas')}}" class="flex items-center w-full gap-7 py-2 px-4 active:bg-slate-600 hover:bg-slate-500 rounded-lg transition-all duration-200 ease-in-out text-slate-800 hover:text-white"
                 x-on:click="isLoading = true">
                     <i class="fa-solid fa-user text-[20px]  text-center"></i><span class="text-lg font-semibold ">Petugas</span>
                 </a>
