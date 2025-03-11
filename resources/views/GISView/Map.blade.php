@@ -106,28 +106,6 @@
             }, 3000);
         }
 
-        // function getPosition(position) {
-        //     var lat = position.coords.latitude
-        //     var long = position.coords.longitude
-        //     var accuracy = position.coords.accuracy
-
-        //     if(marker) {
-        //         map.removelayer(marker);
-        //     }
-
-        //     if(circle) {
-        //         map.removelayer(circle);
-        //     }
-
-        //     var marker = L.marker([lat, long])
-        //     var circle = L.circle([lat, long], {radius: accuracy})
-
-        //     var featureGroup = L.featureGroup([marker, circle]).addTo(map).bindPopup("<h1>Marker</h1>,<p></P>")
-
-        //     // map.fitBounds(featureGroup.getBounds())
-        //     console.log("lat: " + lat + ", lon: " + long + ", accuracy: " + accuracy)
-        // }
-
         function GetLatLon(e){
             const coords = document.querySelector("[name=coordinate]")
             const latTitude = document.querySelector("[name=lat]")
