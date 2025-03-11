@@ -11,7 +11,7 @@
             :class="showSidebar ? 'rotate-45 origin-bottom-right' : ''"></span>
         </button>
         <h1 class="font-bold text-2xl text-slate-700 absolute left-1/2 transform -translate-x-1/2 sm:relative">
-            <span class="text-blue-600">GRM PLT </span> <span id="pumped">PUMPED STORAGE</span>
+            <span class="text-blue-600">GRM PLTA UPPER CISOKAN </span> PUMPED STORAGE 4X260 MW
         </h1>
     </div>
     <div class="flex gap-4">

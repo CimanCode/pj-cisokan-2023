@@ -90,7 +90,7 @@
               </button>
 
             <h1 class="font-bold text-2xl text-slate-700">
-                <span class="text-blue-600">GRM PLT </span><span id="pumped">PUMPED STORAGE</span>
+                <span class="text-blue-600">GRM PLTA UPPER CISOKAN </span> PUMPED STORAGE 4X260 MW
             </h1>
             <div class="flex gap-4">
                 <p id="haloUser" class="text-lg font-semibold text-slate-600">
